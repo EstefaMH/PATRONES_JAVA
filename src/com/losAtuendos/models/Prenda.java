@@ -8,24 +8,26 @@ public abstract class Prenda {
     protected String talla;
     protected double valorAlquiler;
     protected String tipo;
+    protected boolean disponible;
     
-    public Prenda(String ref, String color, String marca, String talla, double valorAlquiler, String tipo) {
+    public Prenda(String ref, String color, String marca, String talla, double valorAlquiler, String tipo, boolean disponible) {
         this.ref = ref;
         this.color = color;
         this.marca = marca;
         this.talla = talla;
         this.valorAlquiler = valorAlquiler;
         this.tipo = tipo;
+        this.disponible = disponible;
     }
 
-    public String getReferencia() {
+    public String getRef() {
         return ref;
     }
 
-    public void setReferencia(String referencia) {
-        this.ref = referencia;
+    public void setRef(String ref) {
+        this.ref = ref;
     }
-
+    
     public String getColor() {
         return color;
     }
@@ -64,6 +66,14 @@ public abstract class Prenda {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
     
     

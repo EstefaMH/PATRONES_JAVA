@@ -16,6 +16,7 @@ public abstract class PrendaFactoryAbstract {
 
     public abstract Prenda crearPrenda(
             String tipo,
+            boolean disponible,
             String ref,
             String color,
             String marca,
@@ -31,6 +32,7 @@ public abstract class PrendaFactoryAbstract {
 
     public abstract List obtenerPrendasPorTalla(String tipo, 
             String ref, 
+            boolean disponible,
             String color, 
             String marca, 
             String talla, 

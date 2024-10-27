@@ -19,12 +19,14 @@ public class VestidoDama extends Prenda {
     private String largo;
     private int cantPiezas;
 
-    public VestidoDama(String referencia, String color, String marca, String talla, double valorAlquiler, String tipoPrenda, boolean pedreria, String largo, int cantidadPiezas) {
-        super(referencia, color, marca, talla, valorAlquiler, tipoPrenda);
+    public VestidoDama(String referencia, String color, String marca, String talla, double valorAlquiler, 
+            String tipoPrenda, boolean disponible, boolean pedreria, String largo, int cantidadPiezas) {
+        super(referencia, color, marca, talla, valorAlquiler, tipoPrenda, disponible);
         this.pedreria = pedreria;
         this.largo = largo;
         this.cantPiezas = cantidadPiezas;
     }
+
 
     public boolean isPedreria() {
         return pedreria;

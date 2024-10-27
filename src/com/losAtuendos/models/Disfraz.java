@@ -1,20 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.losAtuendos.models;
 
-/**
- *
- * @author USER
- */
 public class Disfraz extends Prenda {
 
     private String nombreDisfraz;
 
-    public Disfraz(String referencia, String color, String marca, String talla, double valorAlquiler, String tipoPrenda, String nombreDisfraz) {
-        super(referencia, color, marca, talla, valorAlquiler, tipoPrenda);
+    // Constructor
+    public Disfraz(String referencia, String color, String marca, String talla, double valorAlquiler, 
+            String tipoPrenda, boolean disponible, String nombreDisfraz) {
+        super(referencia, color, marca, talla, valorAlquiler, tipoPrenda, disponible);
         this.nombreDisfraz = nombreDisfraz;
     }
 
@@ -33,13 +26,15 @@ public class Disfraz extends Prenda {
         System.out.println("Color: " + color);
         System.out.println("Marca: " + marca);
         System.out.println("Talla: " + talla);
-        System.out.println("Valor Alquiler: " + valorAlquiler);
+        System.out.println("Valor Alquiler: " + valorAlquiler); 
         System.out.println("Tipo de prenda: " + tipo);
+        System.out.println("¿Está disponible?: " + disponible); 
+        System.out.println("Nombre del disfraz: " + nombreDisfraz); 
     }
 
     @Override
     public boolean validarDatos() {
-        boolean isValid = validarDatosComunes();
+           boolean isValid = validarDatosComunes();
 
         if (nombreDisfraz == null || nombreDisfraz.isEmpty()) {
             System.out.println("Error: El nombre del disfraz no puede estar vacío.");
@@ -48,5 +43,4 @@ public class Disfraz extends Prenda {
 
         return isValid;
     }
-
 }

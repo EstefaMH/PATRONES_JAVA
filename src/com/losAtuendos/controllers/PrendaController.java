@@ -20,6 +20,10 @@ public class PrendaController {
 
     public void registros() {
         boolean pedreria;
+        boolean disponibleVestido;
+        boolean disponibleTraje;
+        boolean disponibleDisfraz;
+
         PrendaFactoryAbstract prenda = new PrendaConcreteFactory();
 
         System.out.print(" ---------- Bienvenido a registros de Prendas los Atuendos ---------- \n\n");
@@ -41,12 +45,16 @@ public class PrendaController {
 
                 System.out.println("Ingrese referencia del vestido ");
                 String referenciaVestido = sc.next();
+
                 System.out.println("Ingrese color del vestido ");
                 String colorVestido = sc.next();
+
                 System.out.println("Ingrese marca del vestido ");
                 String marcaVestido = sc.next();
+
                 System.out.println("Ingrese talla del vestido ");
                 String tallaVestido = sc.next();
+
                 System.out.println("Ingrese valor alquiler del vestido");
                 while (!sc.hasNextDouble()) {
                     System.out.println("Valor inválido. Por favor, ingrese un número decimal.");
@@ -54,13 +62,16 @@ public class PrendaController {
                 }
                 double valorAlquilerVestido = sc.nextDouble();
                 sc.nextLine();
-                
+
+                System.out.println("Ingrese si está diponible: (Y / N):");
+                disponibleVestido = "Y".equalsIgnoreCase(sc.next().toUpperCase());
+
                 System.out.println("Tiene pedreria ? (Y / N)");
                 pedreria = "Y".equalsIgnoreCase(sc.next().toUpperCase());
 
-                System.out.println("Ingresar la altura del vestido");
-                String altura = sc.next();
-                
+                System.out.println("Ingrese largo:");
+                String largoVestido = sc.next();
+
                 System.out.println("Ingresar la cantidad de piezas");
                 while (!sc.hasNextInt()) {
                     System.out.println("Valor inválido. Por favor, ingrese un valor numerico.");
@@ -69,7 +80,7 @@ public class PrendaController {
                 int cantPiezas = sc.nextInt();
                 sc.nextLine();
 
-                Prenda vestido = prenda.crearPrenda("vestido", referenciaVestido, colorVestido, marcaVestido, tallaVestido, valorAlquilerVestido, pedreria, altura, cantPiezas, null, null, null);
+                Prenda vestido = prenda.crearPrenda("vestido", disponibleVestido, referenciaVestido, colorVestido, marcaVestido, tallaVestido, valorAlquilerVestido, pedreria, largoVestido, cantPiezas, null, null, null);
 
                 if (vestido != null) {
                     vestido.mostrarDetalles();
@@ -86,7 +97,7 @@ public class PrendaController {
                 String marcaTraje = sc.next();
                 System.out.println("Ingrese talla del traje ");
                 String tallaTraje = sc.next();
-                
+
                 System.out.println("Ingrese valor alquiler del traje");
                 while (!sc.hasNextDouble()) {
                     System.out.println("Valor inválido. Por favor, ingrese un número decimal.");
@@ -94,13 +105,15 @@ public class PrendaController {
                 }
                 double valorAlquilerTraje = sc.nextDouble();
                 sc.nextLine();
-                
+
                 System.out.println("Ingrese el tipo de traje");
                 String tipoTraje = sc.next();
                 System.out.println("Ingrese el accesorio");
                 String accesorioTraje = sc.next();
+                System.out.println("Ingrese si está diponible: (Y / N):");
+                disponibleTraje = "Y".equalsIgnoreCase(sc.next().toUpperCase());
 
-                Prenda traje = prenda.crearPrenda("traje", referenciaTraje, colorTraje, marcaTraje, tallaTraje, valorAlquilerTraje, false, null, 0, tipoTraje, accesorioTraje, null);
+                Prenda traje = prenda.crearPrenda("traje", disponibleTraje, referenciaTraje, colorTraje, marcaTraje, tallaTraje, valorAlquilerTraje, false, null, 0, tipoTraje, accesorioTraje, null);
 
                 if (traje != null) {
                     traje.mostrarDetalles();
@@ -110,13 +123,16 @@ public class PrendaController {
             case 3:
                 System.out.println("Ingrese referencia del disfraz : ");
                 String referenciaDisfraz = sc.next();
+
                 System.out.print("Ingrese color del traje ");
                 String colorDisfraz = sc.next();
+
                 System.out.println("Ingrese marca del disfraz ");
                 String marcaDisfraz = sc.next();
+
                 System.out.println("Ingrese talla del disfraz ");
                 String tallaDisfraz = sc.next();
-                
+
                 System.out.println("Ingrese valor alquiler del disfraz");
                 while (!sc.hasNextDouble()) {
                     System.out.println("Valor inválido. Por favor, ingrese un número decimal.");
@@ -124,11 +140,14 @@ public class PrendaController {
                 }
                 double valorAlquilerDisfraz = sc.nextDouble();
                 sc.nextLine();
-                
+
+                System.out.println("Ingrese si está diponible: (Y / N):");
+                disponibleDisfraz = "Y".equalsIgnoreCase(sc.next().toUpperCase());
+
                 System.out.println("Ingrese nombre del disfraz");
                 String nombreDisfraz = sc.next();
 
-                Prenda disfraz = prenda.crearPrenda("disfraz", referenciaDisfraz, colorDisfraz, marcaDisfraz, tallaDisfraz, valorAlquilerDisfraz, false, null, 0, null, null, nombreDisfraz);
+                Prenda disfraz = prenda.crearPrenda("disfraz", disponibleDisfraz, referenciaDisfraz, colorDisfraz, marcaDisfraz, tallaDisfraz, valorAlquilerDisfraz, false, null, 0, null, null, nombreDisfraz);
 
                 if (disfraz != null) {
                     disfraz.mostrarDetalles();
