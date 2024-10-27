@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/factory/PrendaFactory/PrendaConcreteFactory.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/repository/PrendaRepository.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/controllers/PrendaController.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/models/VestidoDama.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/factory/PersonaFactory/PersonaConcreteFactory.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/controllers/PersonaController.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/models/Cliente.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/service/PrendaService.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/models/Persona.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/factory/PrendaFactory/PrendaFactoryAbstract.java</file>
+        </group>
+    </open-files>
+</project-private>
