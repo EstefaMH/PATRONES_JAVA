@@ -1,13 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package com.losAtuendos.factory.AlquilerFactory;
 
-/**
- *
- */
-public class AlquilerConcreteFactory {
+import com.losAtuendos.models.Alquiler;
+import com.losAtuendos.models.Cliente;
+import com.losAtuendos.models.Empleado;
+import com.losAtuendos.service.AlquilerService;
+import java.time.LocalDate;
+
+public class AlquilerConcreteFactory extends AlquilerFactoryAbstract {
+
+    private final AlquilerService alquilerService;
+
+    public AlquilerConcreteFactory() {
+        this.alquilerService = new AlquilerService();
+    }
+
+    @Override
+    public Alquiler crearAlquiler(int numeroAlquiler, Cliente cliente, Empleado empleado, LocalDate fechaSolicitud, LocalDate fechaAlquiler, LocalDate fechaRegreso, String ref) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

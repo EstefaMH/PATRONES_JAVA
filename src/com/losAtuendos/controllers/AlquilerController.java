@@ -1,17 +1,22 @@
 package com.losAtuendos.controllers;
 
-import com.losAtuendos.models.Cliente;
-import com.losAtuendos.models.Empleado;
-import com.losAtuendos.models.Prenda;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.losAtuendos.factory.AlquilerFactory.AlquilerConcreteFactory;
+import com.losAtuendos.factory.AlquilerFactory.AlquilerFactoryAbstract;
+import java.util.Scanner;
 
 public class AlquilerController {
-    private List<Prenda> prendas;
+
+    Scanner sc = new Scanner(System.in);
+
+    public void registros() {
+        AlquilerFactoryAbstract alquiler = new AlquilerConcreteFactory();
+
+        System.out.print(" ---------- Bienvenido a registros de Personas los Atuendos ---------- \n\n");
+        System.out.println("Seleccione el tipo de persona a crear:");
+        System.out.println("1. Cliente");
+        System.out.println("2. Empleado");
+
+        /*    private List<Prenda> prendas;
     private List<Empleado> empleados;
     private Map<String, Cliente> clientes; 
 
@@ -54,5 +59,6 @@ public class AlquilerController {
         // Aquí puedes implementar la lógica de verificación de disponibilidad
         // Podrías tener una lista de alquileres activos y comprobar si la prenda está en uso
         return true; // Placeholder
+    }*/
     }
 }

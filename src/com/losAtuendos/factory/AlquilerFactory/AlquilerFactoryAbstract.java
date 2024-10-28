@@ -1,13 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.losAtuendos.factory.AlquilerFactory;
 
-/**
- *
- * @author nelly
- */
-public interface AlquilerFactoryAbstract {
-    
+import com.losAtuendos.models.Alquiler;
+import com.losAtuendos.models.Cliente;
+import com.losAtuendos.models.Empleado;
+import java.time.LocalDate;
+
+public abstract class AlquilerFactoryAbstract {
+     
+    public abstract Alquiler crearAlquiler(int numeroAlquiler, Cliente cliente, Empleado empleado, 
+            LocalDate fechaSolicitud, LocalDate fechaAlquiler, LocalDate fechaRegreso, String ref);
+
 }
