@@ -1,17 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.losAtuendos.factory.PrendaFactory;
 
 import com.losAtuendos.models.Prenda;
-import java.util.List;
 
-/**
- *
- * @author USER
- */
 public abstract class PrendaFactoryAbstract {
 
     public abstract Prenda crearPrenda(
@@ -30,6 +20,7 @@ public abstract class PrendaFactoryAbstract {
             String nombreDisfraz
     );
 
+    /*
     public abstract List obtenerPrendasPorTalla(String tipo, 
             String ref, 
             boolean disponible,
@@ -43,6 +34,6 @@ public abstract class PrendaFactoryAbstract {
             String tipoTraje, 
             String accesorio, 
             String nombreDisfraz
-    );
+    );*/
 
 }

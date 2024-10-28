@@ -90,7 +90,7 @@ public abstract class Prenda {
         if (ref == null || ref.isEmpty()) {
             System.out.println("Error: La referencia no puede estar vacía.");
             isValid = false;
-        }
+    }
 
         if (color == null || color.isEmpty()) {
             System.out.println("Error: El color no puede estar vacío.");
