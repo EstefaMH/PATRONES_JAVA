@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.losAtuendos.service;
 
 import com.losAtuendos.factory.PrendaFactory.PrendaConcreteFactory;
@@ -22,10 +17,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author USER
- */
 public class PrendaService implements PrendaRepository {
 
     DBManager db = new DBManager();
@@ -162,14 +153,18 @@ public class PrendaService implements PrendaRepository {
     }
 
     @Override
-    public List getPrendasByTalla() {
+    public List getPrendasByTalla(String tallaPrenda) {
         List listaPrendas = new ArrayList<>();
         PrendaFactoryAbstract prenda = new PrendaConcreteFactory();
-        String sql = "SELECT p.ref, p.color, p.marca, p.talla, p.valorAlquiler, p.tipo, p.disponible, d.pedreria, d.largo,d.cantPiezas, tc.tipo AS tipoTraje, tc.aderezo, di.nombre FROM Prenda p LEFT JOIN VestidoDama d ON p.ref = d.prenda_ref LEFT JOIN TrajeCaballero tc ON p.ref = tc.prenda_ref LEFT JOIN Disfraz di ON p.ref = di.prenda_ref  WHERE p.talla = 'S'";
+        String sql = "SELECT p.ref, p.color, p.marca, p.talla, p.valorAlquiler, p.tipo, p.disponible, "
+                + "d.pedreria, d.largo,d.cantPiezas, tc.tipo AS tipoTraje, tc.accesorio, di.nombre FROM Prenda p "
+                + "LEFT JOIN VestidoDama d ON p.ref = d.prenda_ref LEFT JOIN TrajeCaballero tc ON p.ref = tc.prenda_ref "
+                + "LEFT JOIN Disfraz di ON p.ref = di.prenda_ref  WHERE p.talla = ? ";
 
         try {
             PreparedStatement stmt = db.createConnection().prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery(sql);
+            stmt.setString(1, tallaPrenda);
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
 
@@ -237,32 +232,193 @@ public class PrendaService implements PrendaRepository {
 
                     }
                     System.out.println("\n\n");
-
                 }
-
-                /*String tipo = rs.getString("tipo");
-                String ref = rs.getString("ref");
-                String color = rs.getString("color");               
-                String marca = rs.getString("marca");
-                String talla = rs.getString("talla");
-                double valorAlquiler = rs.getDouble("valorAlquiler");
-                boolean pedreria = rs.getBoolean("pedreria");
-                String largo = "";
-                int cantPiezas = rs.getInt("cantPiezas");
-                String tipoTraje = rs.getString("tipoTraje");
-                String accesorios = "";
-                String nombreDisfraz = rs.getString("nombre");
-                
-                //System.out.println("Referencia: " + ref + ", Color: " + color + "tipo : " + tipo);
-               // listaPrendas = prenda.obtenerPrendasPorTalla(tipo, ref, color, marca, talla, valorAlquiler , pedreria, largo,cantPiezas, tipoTraje, accesorios, nombreDisfraz);
-                System.out.println("lista de prendas" + listaPrendas);*/
             }
             rs.close();
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return listaPrendas;
+    }
 
+    @Override
+    public List getPrendasByReferencia(String refPrenda) {
+       List listaPrendas = new ArrayList<>();
+        PrendaFactoryAbstract prenda = new PrendaConcreteFactory();
+        String sql = "SELECT p.ref, p.color, p.marca, p.talla, p.valorAlquiler, p.tipo, p.disponible, "
+                + "d.pedreria, d.largo,d.cantPiezas, tc.tipo AS tipoTraje, tc.accesorio, di.nombre FROM Prenda p "
+                + "LEFT JOIN VestidoDama d ON p.ref = d.prenda_ref LEFT JOIN TrajeCaballero tc ON p.ref = tc.prenda_ref "
+                + "LEFT JOIN Disfraz di ON p.ref = di.prenda_ref  WHERE p.ref = ? ";
+
+        try {
+            PreparedStatement stmt = db.createConnection().prepareStatement(sql);
+            stmt.setString(1, refPrenda);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                String tipoPrenda = rs.getString("tipo");
+                if (tipoPrenda.equals("vestidoDama")) {
+                    List<VestidoDama> vestidos = new ArrayList<>();
+                    vestidos.add(new VestidoDama(
+                            rs.getString("ref"),
+                            rs.getString("color"),
+                            rs.getString("marca"),
+                            rs.getString("talla"),
+                            rs.getDouble("valorAlquiler"),
+                            rs.getString("tipo"),
+                            rs.getBoolean("disponible"),
+                            rs.getBoolean("pedreria"),
+                            rs.getString("largo"),
+                            rs.getInt("cantPiezas")
+                    ));
+                    System.out.println(" ------- Vestidos Dama -------- ");
+                    for (VestidoDama vestido : vestidos) {
+
+                        System.out.println(" --------------- ");
+                        vestido.mostrarDetalles();
+                        System.out.println(" --------------- ");
+                    }
+                    System.out.println("\n\n");
+                } else if (tipoPrenda.equals("trajeCaballero")) {
+                    List<TrajeCaballero> trajes = new ArrayList<>();
+                    trajes.add(new TrajeCaballero(
+                            rs.getString("ref"),
+                            rs.getString("color"),
+                            rs.getString("marca"),
+                            rs.getString("talla"),
+                            rs.getDouble("valorAlquiler"),
+                            rs.getString("tipo"),
+                            rs.getBoolean("disponible"),
+                            rs.getString("tipoTraje"),
+                            rs.getString("accesorio")
+                    ));
+                    System.out.println(" ------- Traje Caballero -------- ");
+                    for (TrajeCaballero traje : trajes) {
+                        System.out.println(" --------------- ");
+                        traje.mostrarDetalles();
+                        System.out.println(" --------------- ");
+
+                    }
+                    System.out.println("\n\n");
+                } else if (tipoPrenda.equals("disfraz")) {
+                    List<Disfraz> disfraces = new ArrayList<>();
+                    disfraces.add(new Disfraz(
+                            rs.getString("ref"),
+                            rs.getString("color"),
+                            rs.getString("marca"),
+                            rs.getString("talla"),
+                            rs.getDouble("valorAlquiler"),
+                            rs.getString("tipo"),
+                            rs.getBoolean("disponible"),
+                            rs.getString("nombre")
+                    ));
+                    System.out.println(" ------- Disfraces -------- ");
+                    for (Disfraz disfraz : disfraces) {
+                        System.out.println(" --------------- ");
+                        disfraz.mostrarDetalles();
+                        System.out.println(" --------------- ");
+
+                    }
+                    System.out.println("\n\n");
+                }
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaPrendas;
+    }
+
+    @Override
+    public List getPrendasByDisponibilidad(boolean disponiblePrenda) {
+        List listaPrendas = new ArrayList<>();
+        PrendaFactoryAbstract prenda = new PrendaConcreteFactory();
+        String sql = "SELECT p.ref, p.color, p.marca, p.talla, p.valorAlquiler, p.tipo, p.disponible, "
+                + "d.pedreria, d.largo,d.cantPiezas, tc.tipo AS tipoTraje, tc.accesorio, di.nombre FROM Prenda p "
+                + "LEFT JOIN VestidoDama d ON p.ref = d.prenda_ref LEFT JOIN TrajeCaballero tc ON p.ref = tc.prenda_ref "
+                + "LEFT JOIN Disfraz di ON p.ref = di.prenda_ref  WHERE p.disponible = ? ";
+
+        try {
+            PreparedStatement stmt = db.createConnection().prepareStatement(sql);
+            stmt.setString(1, disponiblePrenda ? "1" : "0");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                String tipoPrenda = rs.getString("tipo");
+                if (tipoPrenda.equals("vestidoDama")) {
+                    List<VestidoDama> vestidos = new ArrayList<>();
+                    vestidos.add(new VestidoDama(
+                            rs.getString("ref"),
+                            rs.getString("color"),
+                            rs.getString("marca"),
+                            rs.getString("talla"),
+                            rs.getDouble("valorAlquiler"),
+                            rs.getString("tipo"),
+                            rs.getBoolean("disponible"),
+                            rs.getBoolean("pedreria"),
+                            rs.getString("largo"),
+                            rs.getInt("cantPiezas")
+                    ));
+                    System.out.println(" ------- Vestidos Dama -------- ");
+                    for (VestidoDama vestido : vestidos) {
+
+                        System.out.println(" --------------- ");
+                        vestido.mostrarDetalles();
+                        System.out.println(" --------------- ");
+                    }
+                    System.out.println("\n\n");
+                } else if (tipoPrenda.equals("trajeCaballero")) {
+                    List<TrajeCaballero> trajes = new ArrayList<>();
+                    trajes.add(new TrajeCaballero(
+                            rs.getString("ref"),
+                            rs.getString("color"),
+                            rs.getString("marca"),
+                            rs.getString("talla"),
+                            rs.getDouble("valorAlquiler"),
+                            rs.getString("tipo"),
+                            rs.getBoolean("disponible"),
+                            rs.getString("tipoTraje"),
+                            rs.getString("accesorio")
+                    ));
+                    System.out.println(" ------- Traje Caballero -------- ");
+                    for (TrajeCaballero traje : trajes) {
+                        System.out.println(" --------------- ");
+                        traje.mostrarDetalles();
+                        System.out.println(" --------------- ");
+
+                    }
+                    System.out.println("\n\n");
+                } else if (tipoPrenda.equals("disfraz")) {
+                    List<Disfraz> disfraces = new ArrayList<>();
+                    disfraces.add(new Disfraz(
+                            rs.getString("ref"),
+                            rs.getString("color"),
+                            rs.getString("marca"),
+                            rs.getString("talla"),
+                            rs.getDouble("valorAlquiler"),
+                            rs.getString("tipo"),
+                            rs.getBoolean("disponible"),
+                            rs.getString("nombre")
+                    ));
+                    System.out.println(" ------- Disfraces -------- ");
+                    for (Disfraz disfraz : disfraces) {
+                        System.out.println(" --------------- ");
+                        disfraz.mostrarDetalles();
+                        System.out.println(" --------------- ");
+
+                    }
+                    System.out.println("\n\n");
+                }
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return listaPrendas;
     }
 

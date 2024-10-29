@@ -63,7 +63,7 @@ public class PrendaController {
                 double valorAlquilerVestido = sc.nextDouble();
                 sc.nextLine();
 
-                System.out.println("Ingrese si está diponible: (Y / N):");
+                System.out.println("Ingrese si está disponible: (Y / N):");
                 disponibleVestido = "Y".equalsIgnoreCase(sc.next().toUpperCase());
 
                 System.out.println("Tiene pedreria ? (Y / N)");
@@ -155,7 +155,7 @@ public class PrendaController {
                 break;
 
             default:
-                System.out.println("Opción no válida. Por favor elija 1 o 2.");
+                System.out.println("Opción no válida. Por favor marque 1, 2 o 3.");
                 break;
         }
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.losAtuendos.controllers;
 
 import com.losAtuendos.factory.PersonaFactory.PersonaConcreteFactory;
@@ -10,10 +5,6 @@ import com.losAtuendos.factory.PersonaFactory.PersonaFactoryAbstract;
 import com.losAtuendos.models.Persona;
 import java.util.Scanner;
 
-/**
- *
- * @author USER
- */
 public class PersonaController {
 
     Scanner sc = new Scanner(System.in);

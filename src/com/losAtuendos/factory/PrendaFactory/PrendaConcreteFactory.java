@@ -66,6 +66,7 @@ public class PrendaConcreteFactory extends PrendaFactoryAbstract {
         return prenda;
     }
 
+    /*
     @Override
     public List obtenerPrendasPorTalla(String tipo, String ref, boolean disponible, String color, String marca, String talla, double valorAlquiler, boolean pedreria, String largo, int cantPiezas, String tipoTraje, String accesorio, String nombreDisfraz) {
         Prenda prenda = null;
@@ -96,6 +97,6 @@ public class PrendaConcreteFactory extends PrendaFactoryAbstract {
         }
 
         return listaPrendas;
-    }
+    }*/
 
 }

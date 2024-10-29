@@ -24,7 +24,7 @@ public class servicioAlquilerFacade {
         this.alquilercontroller = alquilercontroller;
     }
     
-            
+
    /* public void RegistroServicioAlquiler(String idCliente , String idEmpleado, List<String> referenciasPrendas , Date fechaAlquiler ){
         Cliente cliente = alquilercontroller.obtenerCliente(idCliente);
         Empleado empleado = alquilercontroller.obtenerEmpleado(idEmpleado);

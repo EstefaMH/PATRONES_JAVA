@@ -64,8 +64,7 @@ public class losAtuendos {
 
                     case 3:
                         //Alquiler controler método para registrar alquiler
-                        PrendaService prenda = new PrendaService();
-                        prenda.getPrendasByTalla();
+                       
                         break;
 
                     case 4:
@@ -84,6 +83,7 @@ public class losAtuendos {
 
                     case 5:
                         //Lavado controler método para enviar prendas a lavado según la lista
+                        System.out.println("Por implementar");
                         break;
 
                     case 0:
@@ -115,41 +115,58 @@ public class losAtuendos {
                 int opcTwo = sc.nextInt();
                 sc.nextLine();
 
+                PrendaService prenda = new PrendaService();
                 switch (opcTwo) {
                     case 1:
-
+                        //Consultar alquiler por número
+                        System.out.println("Por implementar");
                         break;
 
                     case 2:
-
+                        //Consultar alquiler por cliente
+                        System.out.println("Por implementar");
                         break;
 
                     case 3:
-
+                        //Consultar alquiler por fecha
+                        System.out.println("Por implementar");
                         break;
 
                     case 4:
-
+                        //Consultar prendas por talla
+                        System.out.println("Tngrese la talla que desea consultar (10, 12, 14, S, M, L, XL, XXL):");
+                        String tallaConsulta = sc.nextLine();                        
+                        prenda.getPrendasByTalla(tallaConsulta);
                         break;
 
                     case 5:
-
+                        //Consultar prendas por referencia
+                        System.out.println("Tngrese la referencia que desea consultar:");
+                        String refConsulta = sc.nextLine();
+                        prenda.getPrendasByReferencia(refConsulta);
                         break;
 
                     case 6:
-
+                        //Consultar prendas disponibles
+                        System.out.println("Por corregir");
+                        System.out.println("Ingrese Y para disponibles y N para No disponibles: (Y / N):");
+                        boolean disponiblesConsulta = "Y".equalsIgnoreCase(sc.next().toUpperCase());
+                        prenda.getPrendasByDisponibilidad(disponiblesConsulta);
                         break;
 
                     case 7:
-
+                        //Consultar lista de lavado
+                        System.out.println("Por implementar");
                         break;
 
                     case 8:
-
+                        //Consultar clientes registrados
+                        System.out.println("Por implementar");
                         break;
 
                     case 9:
-
+                        //Consultar empleados registrados
+                        System.out.println("Por implementar");
                         break;
 
                     case 0:
