@@ -20,7 +20,7 @@ public class AlquilerController {
     private List<Empleado> empleados;
     private Map<String, Cliente> clientes; 
 
-    public AlquilerController() {
+   /* public AlquilerController() {
         prendas = new ArrayList<>();
         empleados = new ArrayList<>();
         clientes = new HashMap<>();
@@ -59,5 +59,5 @@ public class AlquilerController {
         // Aquí puedes implementar la lógica de verificación de disponibilidad
         // Podrías tener una lista de alquileres activos y comprobar si la prenda está en uso
         return true; // Placeholder
-    }
+    }*/
 }

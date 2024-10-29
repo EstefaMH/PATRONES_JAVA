@@ -265,4 +265,28 @@ public class PrendaService implements PrendaRepository {
 
         return listaPrendas;
     }
+
+    @Override
+    public void registroPrendasParaLavanderia(String ref, int prioridad ) {
+         String sqlInsert = "INSERT INTO lavanderia (prenda_ref, prioridad ) VALUES (?, ?)";
+        try {
+            PreparedStatement pstmt = db.createConnection().prepareStatement(sqlInsert);
+            pstmt.setString(1, ref);
+            pstmt.setInt(2, prioridad);
+
+            System.out.println("The SQL statement is: " + sqlInsert + "\n");
+
+            int rowsInserted = pstmt.executeUpdate();
+            if (rowsInserted < 0) {
+                System.out.println("No se completo el registro, intentelo mas tarde");
+            }
+
+            System.out.println("Nuevo registro de prenda para lavanderia insertado correctamente.");
+ 
+        } catch (SQLException ex) {
+            Logger.getLogger(com.losAtuendos.models.Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error");
+           
+        }
+    }
 }

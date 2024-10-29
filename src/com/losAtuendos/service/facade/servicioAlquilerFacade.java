@@ -25,16 +25,18 @@ public class servicioAlquilerFacade {
     }
     
             
-    public void RegistroServicioAlquiler(String idCliente , String idEmpleado, List<String> referenciasPrendas , Date fechaAlquiler ){
+   /* public void RegistroServicioAlquiler(String idCliente , String idEmpleado, List<String> referenciasPrendas , Date fechaAlquiler ){
         Cliente cliente = alquilercontroller.obtenerCliente(idCliente);
         Empleado empleado = alquilercontroller.obtenerEmpleado(idEmpleado);
        // List<Prenda> prendas = alquilercontroller.obtenerPrendasPorReferencia(referenciasPrendas);
         
-    }
+    }*/
     
     // consulta servicio alquiler (private)
     // consulta servicio por cliente (private)
     // Registro prenda para envío a lavandería ? o en lavanderia 
+    
+    
     // Visualización de listado de prendas para envío a lavandería ? o en lavanderia
     // Enviar prendas a lavandería
     

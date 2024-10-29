@@ -70,6 +70,16 @@ public class losAtuendos {
 
                     case 4:
                         //Lavado controler método para registrar en lista de lavado
+                        PrendaService prendaLavanderia = new PrendaService();
+                        System.out.println("ingrese la referencia de la prenda");
+                        String ref = sc.next();
+                        System.out.println("Ingrese la prioridad ( 0 o 1 ) ");
+                        while (!sc.hasNextInt()) {
+                            System.out.println("Valor inválido. Por favor, ingrese un valor numerico.");
+                            sc.nextLine();
+                        }
+                        int prioridad = sc.nextInt();
+                        prendaLavanderia.registroPrendasParaLavanderia(ref, prioridad);
                         break;
 
                     case 5:

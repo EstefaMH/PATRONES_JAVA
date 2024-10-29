@@ -5,11 +5,17 @@
         <group>
             <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/factory/PrendaFactory/PrendaConcreteFactory.java</file>
             <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/repository/PrendaRepository.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/models/Prenda.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/service/facade/servicioAlquilerFacade.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/models/TrajeCaballero.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/models/Cliente.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/losAtuendos.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/controllers/AlquilerController.java</file>
             <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/controllers/PrendaController.java</file>
             <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/models/VestidoDama.java</file>
             <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/factory/PersonaFactory/PersonaConcreteFactory.java</file>
             <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/controllers/PersonaController.java</file>
-            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/models/Cliente.java</file>
+            <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/models/Disfraz.java</file>
             <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/service/PrendaService.java</file>
             <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/models/Persona.java</file>
             <file>file:/C:/Users/USER/OneDrive/Documentos/NetBeansProjects/JAVAPATRONESDESOFTWARE_FactoryMethod/src/com/losAtuendos/factory/PrendaFactory/PrendaFactoryAbstract.java</file>

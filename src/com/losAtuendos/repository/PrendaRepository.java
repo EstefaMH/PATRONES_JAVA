@@ -22,5 +22,8 @@ public interface PrendaRepository {
     boolean postDisfraz(Disfraz disfraz);
 
     List getPrendasByTalla();
+    
+    void registroPrendasParaLavanderia(String ref, int prioridad);
+       
 
 }
