@@ -42,8 +42,21 @@ public class AlquilerController {
     // Prenda vestido = prenda.crearPrenda("vestido", disponibleVestido, referenciaVestido, colorVestido, marcaVestido, tallaVestido, valorAlquilerVestido, pedreria, largoVestido, cantPiezas, null, null, null);
     public void registros() {
 
-        System.out.print(" ---------- Bienvenido a registros de alquileres los Atuendos ---------- \n\n");
+        System.out.print(" ---------- Bienvenido al manejo de Alquileres ---------- \n\n");
+        System.out.println("Escriba el número de la opción que desea:");
+        System.out.println("1. Registros");
+        System.out.println("2. Consultas");
+        
+        System.out.println("Ingrese una opción");
+        while (!sc.hasNextInt()) {
+            System.out.println("Valor inválido. Por favor, ingrese un valor numerico.");
+            sc.nextLine();
+        }
+        int opc = sc.nextInt();
+        sc.nextLine();
 
+        switch (opc) {
+            case 1:
         //Pedir cliente_id
         do {
             System.out.print("\nIngrese el número de identificación del cliente: ");
@@ -112,6 +125,30 @@ public class AlquilerController {
         System.out.println("Fecha de devolución: " + fechaDevolucion);
         System.out.println("Número de prendas: " + numeroPrendasParaRegistro);
 
-        System.out.println("Se ha creado con éxito la solicitud numero " + " con fecha: " + "");
+        System.out.println("Se ha creado con éxito la solicitud numero " + " con fecha de devolucion: " + fechaDevolucion);
+    break;
+            case 2:
+                
+        System.out.println("1. Consulta por numero de alquiler");
+        System.out.println("2. Consulta por id de cliente");
+        System.out.println("2. Consulta por fecha de alquiler");
+        
+        System.out.println("Ingrese una opción");
+        while (!sc.hasNextInt()) {
+            System.out.println("Valor inválido. Por favor, ingrese un valor numerico.");
+            sc.nextLine();
+        }
+        int opc1 = sc.nextInt();
+        sc.nextLine();
+
+        switch (opc1) {
+            case 1:
+            System.out.print("\nIngrese el número de alquiler: ");
+            clienteIdIngresado = sc.nextLine();
+            servicioAlquilerFacade.registrarAlquiler(0000, clienteIdIngresado, empleadoIdIngresado, LocalDate.now(), fechaRetiro, fechaDevolucion, prendas);
+               break;
+        }
+                
+    }
     }
 }
