@@ -26,7 +26,9 @@ public class AlquilerConcreteFactory extends AlquilerFactoryAbstract {
                 alquiler.setNumeroAlquiler(numero);
                 System.out.println("create Alquiler " + numero);
             break;
-            case "detalleAlquiler":
+            case "detalle_alquiler":
+                System.out.println("create detalle numero " + numeroAlquiler);
+                System.out.println("create detalle ref " + refPrenda);
                 alquiler = new DetalleAlquiler(numeroAlquiler, clienteId, empleadoId, fechaSolicitud, fechaAlquiler, fechaRegreso, refPrenda);
                 boolean createDetalleAlquiler = alquilerService.postDetalleAlquiler((DetalleAlquiler) alquiler);
                 System.out.println("create Detalle Alquiler " + createDetalleAlquiler);

@@ -6,6 +6,7 @@ import com.losAtuendos.models.Alquiler;
 import com.losAtuendos.models.DetalleAlquiler;
 import com.losAtuendos.service.AlquilerService;
 import com.losAtuendos.service.facade.ServicioAlquilerFacadeImpl;
+import com.losAtuendos.service.facade.ServicioAlquilerI;
 import com.losAtuendos.utils.dao.TemporalDAO;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,6 +17,7 @@ import java.util.Scanner;
 
 public class AlquilerController {
     private ServicioAlquilerFacadeImpl servicioAlquilerFacade;
+    
     Scanner sc = new Scanner(System.in);
     String clienteIdIngresado;
     String empleadoIdIngresado;
@@ -24,7 +26,16 @@ public class AlquilerController {
     LocalDate fechaDevolucion = null;
     int numeroPrendasParaRegistro;
     String referenciaPrendaFor;
+    
+     public AlquilerController() {
+        // Crear una instancia de ServicioAlquilerFacadeImpl con un AlquilerService predeterminado
+        this.servicioAlquilerFacade = new ServicioAlquilerFacadeImpl(new AlquilerService());
+    }
 
+    // Constructor con el parámetro de servicio para mayor flexibilidad
+    public AlquilerController(ServicioAlquilerFacadeImpl servicioAlquilerFacade) {
+        this.servicioAlquilerFacade = servicioAlquilerFacade;
+    }
     //AlquilerFactoryAbstract alquiler = new AlquilerConcreteFactory();
     //   AlquilerService alquilerservice = new AlquilerService();
     // Alquiler detalleAlquiler = alquiler.crearAlquiler(numeroPrendasParaRegistro, cliente, empleado, LocalDate.EPOCH, LocalDate.MIN, LocalDate.MAX, clienteIdIngresado);
@@ -79,16 +90,19 @@ public class AlquilerController {
         
         System.out.println("Se van a registrar " + numeroPrendasParaRegistro + " prendas");
        List<String> prendas= new ArrayList<>();
-        for (int i = 0;i <= numeroPrendasParaRegistro;i++) {
-           do{ System.out.println("Ingrese referencia de la prenda " + i);
-            referenciaPrendaFor = sc.nextLine();
-            
-             } while (!TemporalDAO.validarIdPrenda(referenciaPrendaFor));
-           prendas.add(referenciaPrendaFor);
-            
+       for (int i = 0; i < numeroPrendasParaRegistro; i++) {
+        String referenciaPrenda = sc.nextLine();
+            do {
+                System.out.println("Ingrese referencia de la prenda " + (i + 1));
+                referenciaPrenda = sc.nextLine();
+            } while (!TemporalDAO.validarIdPrenda(referenciaPrenda));
+
+            prendas.add(referenciaPrenda);
         }
+
+        System.out.println("Prendas registradas: "+prendas);
         //porfin llamo el facade y le paso todos los datos
-        servicioAlquilerFacade.registrarAlquiler(0000, clienteIdIngresado, empleadoIdIngresado, fechaDevolucion, fechaRetiro, fechaRetiro, prendas);
+        servicioAlquilerFacade.registrarAlquiler(0000, clienteIdIngresado, empleadoIdIngresado, LocalDate.now(), fechaRetiro, fechaDevolucion, prendas);
         
         
         System.out.println("Se van a registrar los siguientes datos: ");

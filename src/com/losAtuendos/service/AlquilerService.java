@@ -5,6 +5,7 @@ import com.losAtuendos.factory.AlquilerFactory.AlquilerFactoryAbstract;
 import com.losAtuendos.models.Alquiler;
 import com.losAtuendos.models.DetalleAlquiler;
 import com.losAtuendos.repository.AlquilerRepository;
+import com.losAtuendos.service.facade.ServicioAlquilerI;
 import com.losAtuendos.utils.dao.DBManager;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.sql.PreparedStatement;
@@ -15,17 +16,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-public class AlquilerService implements AlquilerRepository {
+public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
 
     private DBManager db = new DBManager();
 
     @Override
     public int postAlquiler(Alquiler alquiler) {
-    String sqlInsert = "INSERT INTO Alquiler (fechaSolicitud, fechaAlquiler, fechaEntrega, cliente_id, empleado_id) VALUES (?, ?, ?, ?, ?, ?)";
+    String sqlInsert = "INSERT INTO servicioAlquiler (fechaSolicitud, fechaAlquiler, fechaEntrega, cliente_id, empleado_id) VALUES (?, ?, ?, ?, ?)";
         try {
-            PreparedStatement pstmt = db.createConnection().prepareStatement(sqlInsert);
+            PreparedStatement pstmt = db.createConnection().prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);
+    
             pstmt.setDate(1,  Date.valueOf(alquiler.getFechaSolicitud()));
             pstmt.setDate(2, Date.valueOf(alquiler.getFechaAlquiler()));
             pstmt.setDate(3, Date.valueOf(alquiler.getFechaRegreso()));
@@ -40,6 +43,8 @@ public class AlquilerService implements AlquilerRepository {
             if (generatedKeys.next()) {
                 return generatedKeys.getInt(1); // Retorna el ID generado
             }
+            System.out.println("Nuevo registro alquiler insertado correctamente.");
+            
         }
         throw new SQLException("Error al obtener el ID del nuevo alquiler");
         } catch (SQLException ex) {
@@ -54,8 +59,8 @@ public class AlquilerService implements AlquilerRepository {
         try {
             PreparedStatement pstmt = db.createConnection().prepareStatement(sqlInsert);
             
-            pstmt.setInt(4, detalleAlquiler.getNumeroAlquiler());
-            pstmt.setString(5, detalleAlquiler.getRef());
+            pstmt.setInt(1, detalleAlquiler.getNumeroAlquiler());
+            pstmt.setString(2, detalleAlquiler.getRef());
 
             System.out.println("The SQL statement is: " + sqlInsert + "\n");
 
@@ -274,5 +279,30 @@ public class AlquilerService implements AlquilerRepository {
             e.printStackTrace();
         }
         return flag;
+    }
+
+    @Override
+    public boolean registrarAlquiler(int numeroAlquiler, String clienteId, String empleadoId, LocalDate fechaSolicitud, LocalDate fechaAlquiler, LocalDate fechaRegreso, List<String> refPrenda) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Alquiler> obtenerTodosLosAlquileres() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Alquiler consultarAlquilerPorId(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean actualizarAlquiler(Alquiler alquiler) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean eliminarAlquiler(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -15,9 +15,9 @@ public class Alquiler {
         this.numeroAlquiler = numeroAlquiler;
         this.cliente = cliente;
         this.empleado = empleado;
-        this.fechaSolicitud = LocalDate.now();
+        this.fechaSolicitud = fechaSolicitud;
         this.fechaAlquiler = fechaAlquiler;
-        this.fechaAlquiler = fechaRegreso;
+        this.fechaRegreso = fechaRegreso;
     }
 
     public int getNumeroAlquiler() {

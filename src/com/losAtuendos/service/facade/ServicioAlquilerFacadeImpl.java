@@ -28,9 +28,11 @@ public class ServicioAlquilerFacadeImpl implements ServicioAlquilerI {
                                                           fechaAlquiler, fechaRegreso, null);
             if (alquilerPrincipal != null) {
             alquilerPrincipal.mostrarDetalles();
+            int numero=alquilerPrincipal.getNumeroAlquiler();
+            System.out.println("numero->"+numero);
             // Crear cada detalle de alquiler con la lista de referencias
             for (String refPrenda : refPrendas) {
-                Alquiler detalleAlquiler = alquiler.crearAlquiler("detalleAlquiler", numeroAlquiler, clienteId, 
+                Alquiler detalleAlquiler = alquiler.crearAlquiler("detalle_alquiler", numero, clienteId, 
                                                                          empleadoId, fechaSolicitud, fechaAlquiler, fechaRegreso, refPrenda);
                 if (detalleAlquiler == null) {
                     return false; // En caso de error, devolver false

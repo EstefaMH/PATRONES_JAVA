@@ -52,7 +52,7 @@ public class TemporalDAO {
             if (rs.next()) {
                 String id_BaseDeDatos = rs.getString("persona_id");
                 if (id_BaseDeDatos.equalsIgnoreCase(empleadoIdIngresado)) {
-                    System.out.println("Cliente registrado");
+                    System.out.println("Empleado registrado");
                     flag = true;
                 } else {
                     System.out.println("Error: el cliente no está registrado");
@@ -79,7 +79,7 @@ public class TemporalDAO {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                String id_BaseDeDatos = rs.getString("persona_id");
+                String id_BaseDeDatos = rs.getString("ref");
                 if (id_BaseDeDatos.equalsIgnoreCase(prendaIdPrenda)) {
                     System.out.println("Prenda registrada");
                     flag = true;
