@@ -15,6 +15,8 @@ public interface ServicioAlquilerI {
     
     
     Alquiler consultarAlquilerPorId(int id);
+    List<Alquiler> consultarAlquilerPorCliente(String idCliente);
+    List<Alquiler> consultarAlquilerPorFecha(LocalDate idCliente);
     
     
     boolean actualizarAlquiler(Alquiler alquiler);

@@ -57,6 +57,16 @@ public class ServicioAlquilerFacadeImpl implements ServicioAlquilerI {
     public Alquiler consultarAlquilerPorId(int id) {
         return servicioAlquiler.consultarAlquilerPorId(id);
     }
+    
+@Override
+    public List<Alquiler> consultarAlquilerPorCliente(String idCliente) {
+        return servicioAlquiler.consultarAlquilerPorCliente(idCliente);
+    }
+
+    @Override
+    public List<Alquiler> consultarAlquilerPorFecha(LocalDate fecha) {
+        return servicioAlquiler.consultarAlquilerPorFecha(fecha);
+    }
 
     @Override
     public boolean actualizarAlquiler(Alquiler alquiler) {

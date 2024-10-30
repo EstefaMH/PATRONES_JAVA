@@ -144,8 +144,18 @@ public class AlquilerController {
         switch (opc1) {
             case 1:
             System.out.print("\nIngrese el número de alquiler: ");
-            clienteIdIngresado = sc.nextLine();
-            servicioAlquilerFacade.registrarAlquiler(0000, clienteIdIngresado, empleadoIdIngresado, LocalDate.now(), fechaRetiro, fechaDevolucion, prendas);
+            int idIngresado2 = Integer.parseInt(sc.nextLine());
+            servicioAlquilerFacade.consultarAlquilerPorId( idIngresado2);
+               break;
+               case 2:
+            System.out.print("\nIngrese el id del cleinte: ");
+            String idCliente = sc.nextLine();
+            servicioAlquilerFacade.consultarAlquilerPorCliente(idCliente);
+               break;
+               case 3:
+            System.out.print("\nIngrese el número de alquiler: ");
+            LocalDate fecha = sc.nextLine();
+            servicioAlquilerFacade.consultarAlquilerPorId(fecha);
                break;
         }
                 
