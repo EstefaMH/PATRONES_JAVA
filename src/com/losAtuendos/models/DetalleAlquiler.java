@@ -6,9 +6,9 @@ public class DetalleAlquiler extends Alquiler {
 
     private String ref;
 
-    public DetalleAlquiler(int numeroAlquiler, Cliente cliente, Empleado empleado, LocalDate fechaSolicitud,
+    public DetalleAlquiler(int numeroAlquiler, String cliente, String empleado, LocalDate fechaSolicitud,
             LocalDate fechaAlquiler, LocalDate fechaRegreso, String ref) {
-        super(numeroAlquiler, cliente, empleado, fechaSolicitud, fechaAlquiler, fechaRegreso);
+       super(numeroAlquiler, cliente, empleado, fechaSolicitud, fechaAlquiler, fechaRegreso);
         this.ref = ref;
     }
 

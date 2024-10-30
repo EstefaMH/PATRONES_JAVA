@@ -29,9 +29,9 @@ public class DBManager {
 
         try {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("exitoso");
+            System.out.println("conexion exitosa base de datos");
         }  catch (SQLException e) {
-            System.out.println("fallo");
+            System.out.println("fallo a conexion base de datos");
         }
 
         return conn;

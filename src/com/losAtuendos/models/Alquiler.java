@@ -2,20 +2,20 @@ package com.losAtuendos.models;
 
 import java.time.LocalDate;
 
-public abstract class Alquiler {
+public class Alquiler {
 
     protected int numeroAlquiler;
-    protected Cliente cliente;
-    protected Empleado empleado;
+    protected String cliente;
+    protected String empleado;
     protected LocalDate fechaSolicitud;
     protected LocalDate fechaAlquiler;
     protected LocalDate fechaRegreso;
 
-    public Alquiler(int numeroAlquiler, Cliente cliente, Empleado empleado, LocalDate fechaSolicitud, LocalDate fechaAlquiler, LocalDate fechaRegreso) {
+    public Alquiler(int numeroAlquiler, String cliente, String empleado, LocalDate fechaSolicitud, LocalDate fechaAlquiler, LocalDate fechaRegreso) {
         this.numeroAlquiler = numeroAlquiler;
         this.cliente = cliente;
         this.empleado = empleado;
-        this.fechaSolicitud = fechaSolicitud;
+        this.fechaSolicitud = LocalDate.now();
         this.fechaAlquiler = fechaAlquiler;
         this.fechaAlquiler = fechaRegreso;
     }
@@ -28,19 +28,19 @@ public abstract class Alquiler {
         this.numeroAlquiler = numeroAlquiler;
     }
 
-    public Cliente getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 
-    public Empleado getEmpleado() {
+    public String getEmpleado() {
         return empleado;
     }
 
-    public void setEmpleado(Empleado empleado) {
+    public void setEmpleado(String empleado) {
         this.empleado = empleado;
     }
 
@@ -68,6 +68,13 @@ public abstract class Alquiler {
         this.fechaRegreso = fechaRegreso;
     }
 
-    public abstract void mostrarDetalles();
+    public void mostrarDetalles() {
+        System.out.println("Se van a registrar los siguientes datos: ");
+        System.out.println("Numero de orden: " + numeroAlquiler);
+        System.out.println("Cliente: " + cliente);
+        System.out.println("Empleado: " + empleado);
+        System.out.println("Fecha de retiro: " + fechaAlquiler);
+        System.out.println("Fecha de devolución: " + fechaRegreso);
+    }
 
 }

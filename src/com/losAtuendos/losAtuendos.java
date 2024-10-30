@@ -1,5 +1,6 @@
 package com.losAtuendos;
 
+import com.losAtuendos.controllers.AlquilerController;
 import com.losAtuendos.controllers.PersonaController;
 import com.losAtuendos.controllers.PrendaController;
 import com.losAtuendos.service.PrendaService;
@@ -63,8 +64,9 @@ public class losAtuendos {
                         break;
 
                     case 3:
-                        //Alquiler controler método para registrar alquiler
-                       
+                         //Alquiler controler método para registrar alquiler
+                        AlquilerController alquilerController = new AlquilerController();
+                        alquilerController.registros();
                         break;
 
                     case 4:

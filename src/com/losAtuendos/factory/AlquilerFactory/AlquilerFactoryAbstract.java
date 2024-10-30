@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public abstract class AlquilerFactoryAbstract {
      
-    public abstract Alquiler crearAlquiler(int numeroAlquiler, Cliente cliente, Empleado empleado, 
+    public abstract Alquiler crearAlquiler( String tipoAlquiler,int numeroAlquiler, String cliente, String empleado, 
             LocalDate fechaSolicitud, LocalDate fechaAlquiler, LocalDate fechaRegreso, String ref);
 
 }

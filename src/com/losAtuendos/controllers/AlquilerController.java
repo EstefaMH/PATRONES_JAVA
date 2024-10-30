@@ -2,63 +2,102 @@ package com.losAtuendos.controllers;
 
 import com.losAtuendos.factory.AlquilerFactory.AlquilerConcreteFactory;
 import com.losAtuendos.factory.AlquilerFactory.AlquilerFactoryAbstract;
+import com.losAtuendos.models.Alquiler;
+import com.losAtuendos.models.DetalleAlquiler;
+import com.losAtuendos.service.AlquilerService;
+import com.losAtuendos.service.facade.ServicioAlquilerFacadeImpl;
+import com.losAtuendos.utils.dao.TemporalDAO;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AlquilerController {
-
+    private ServicioAlquilerFacadeImpl servicioAlquilerFacade;
     Scanner sc = new Scanner(System.in);
+    String clienteIdIngresado;
+    String empleadoIdIngresado;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate fechaRetiro = null;
+    LocalDate fechaDevolucion = null;
+    int numeroPrendasParaRegistro;
+    String referenciaPrendaFor;
 
+    //AlquilerFactoryAbstract alquiler = new AlquilerConcreteFactory();
+    //   AlquilerService alquilerservice = new AlquilerService();
+    // Alquiler detalleAlquiler = alquiler.crearAlquiler(numeroPrendasParaRegistro, cliente, empleado, LocalDate.EPOCH, LocalDate.MIN, LocalDate.MAX, clienteIdIngresado);
+    // Prenda vestido = prenda.crearPrenda("vestido", disponibleVestido, referenciaVestido, colorVestido, marcaVestido, tallaVestido, valorAlquilerVestido, pedreria, largoVestido, cantPiezas, null, null, null);
     public void registros() {
-        AlquilerFactoryAbstract alquiler = new AlquilerConcreteFactory();
 
-        System.out.print(" ---------- Bienvenido a registros de Personas los Atuendos ---------- \n\n");
-        System.out.println("Seleccione el tipo de persona a crear:");
-        System.out.println("1. Cliente");
-        System.out.println("2. Empleado");
+        System.out.print(" ---------- Bienvenido a registros de alquileres los Atuendos ---------- \n\n");
 
-        /*    private List<Prenda> prendas;
-    private List<Empleado> empleados;
-    private Map<String, Cliente> clientes; 
+        //Pedir cliente_id
+        do {
+            System.out.print("\nIngrese el número de identificación del cliente: ");
+            clienteIdIngresado = sc.nextLine();
+            //llamar método que busque y valide si existe Cliente DAO
+            //} while (!AlquilerService.validarIdCliente(clienteIdIngresado));
+        } while (!TemporalDAO.validarIdCliente(clienteIdIngresado));
 
-   /* public AlquilerController() {
-        prendas = new ArrayList<>();
-        empleados = new ArrayList<>();
-        clientes = new HashMap<>();
-    }
+        //Pedir empleado_id
+        do {
+            System.out.print("\nIngrese el número de identificación del empleado: ");
+            empleadoIdIngresado = sc.nextLine();
+            //llamar método que busque y valide si existe Empleado DAO
+            //} while (!AlquilerService.validarIdEmpleado(empleadoIdIngresado));
+        } while (!TemporalDAO.validarIdEmpleado(empleadoIdIngresado));
 
-    public void agregarPrenda(Prenda prenda) {
-        prendas.add(prenda);
-    }
-
-    public void agregarEmpleado(Empleado empleado) {
-        empleados.add(empleado);
-    }
-
-    public void agregarCliente(Cliente cliente) {
-        clientes.put(cliente.getId(), cliente);
-    }
-
-    public List<Prenda> obtenerPrendas() {
-        return prendas;
-    }
-
-    public Empleado obtenerEmpleado(String numIdentificacion) {
-        for (Empleado empleado : empleados) {
-            if (empleado.getId().equals(numIdentificacion)) {
-                return empleado;
+        //Pedir fecha de alquiler
+        do {
+            System.out.print("\nIngrese la fecha de retiro (AAAA-MM-DD): ");
+            String fechaIngresadaRetiro = sc.nextLine();
+            try {
+                fechaRetiro = LocalDate.parse(fechaIngresadaRetiro, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Fecha inválida. Por favor, ingrese la fecha en el formato correcto.");
             }
+        } while (fechaRetiro == null);
+
+        //Pedir fecha de entrega
+        do {
+            System.out.print("\nIngrese la fecha de devolucion (AAAA-MM-DD): ");
+            String fechaIngresadaDevolucion = sc.nextLine();
+            try {
+                fechaDevolucion = LocalDate.parse(fechaIngresadaDevolucion, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Fecha inválida. Por favor, ingrese la fecha en el formato correcto.");
+            }
+        } while (fechaDevolucion == null);
+        System.out.println("\nIngrese el número de prendas a registrar");
+        while (!sc.hasNextInt()) {
+            System.out.println("Valor inválido. Por favor, ingrese un valor numerico.");
+            sc.nextLine();
         }
-        return null;
-    }
+        numeroPrendasParaRegistro = sc.nextInt();
+        
+        System.out.println("Se van a registrar " + numeroPrendasParaRegistro + " prendas");
+       List<String> prendas= new ArrayList<>();
+        for (int i = 0;i <= numeroPrendasParaRegistro;i++) {
+           do{ System.out.println("Ingrese referencia de la prenda " + i);
+            referenciaPrendaFor = sc.nextLine();
+            
+             } while (!TemporalDAO.validarIdPrenda(referenciaPrendaFor));
+           prendas.add(referenciaPrendaFor);
+            
+        }
+        //porfin llamo el facade y le paso todos los datos
+        servicioAlquilerFacade.registrarAlquiler(0000, clienteIdIngresado, empleadoIdIngresado, fechaDevolucion, fechaRetiro, fechaRetiro, prendas);
+        
+        
+        System.out.println("Se van a registrar los siguientes datos: ");
+        System.out.println("Cliente: " + clienteIdIngresado);
+        System.out.println("Empleado: " + empleadoIdIngresado);
+        System.out.println("Fecha de retiro: " + fechaRetiro);
+        System.out.println("Fecha de devolución: " + fechaDevolucion);
+        System.out.println("Número de prendas: " + numeroPrendasParaRegistro);
 
-    public Cliente obtenerCliente(String numIdentificacion) {
-        return clientes.get(numIdentificacion);
-    }
-
-    public boolean verificarDisponibilidad(Prenda prenda, Date fechaAlquiler) {
-        // Aquí puedes implementar la lógica de verificación de disponibilidad
-        // Podrías tener una lista de alquileres activos y comprobar si la prenda está en uso
-        return true; // Placeholder
-    }*/
+        System.out.println("Se ha creado con éxito la solicitud numero " + " con fecha: " + "");
     }
 }
