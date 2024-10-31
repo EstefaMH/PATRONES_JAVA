@@ -251,6 +251,7 @@ public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
         }
         return flag;
     }
+   
     public boolean validarIdPrenda(String prendaIdPrenda) {
         DBManager db = new DBManager();
         boolean flag = false;
@@ -281,30 +282,7 @@ public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
         return flag;
     }
 
-    @Override
-    public boolean registrarAlquiler(int numeroAlquiler, String clienteId, String empleadoId, LocalDate fechaSolicitud, LocalDate fechaAlquiler, LocalDate fechaRegreso, List<String> refPrenda) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Alquiler> obtenerTodosLosAlquileres() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Alquiler consultarAlquilerPorId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean actualizarAlquiler(Alquiler alquiler) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean eliminarAlquiler(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public List<Alquiler> consultarAlquilerPorCliente(String idCliente) {
@@ -368,7 +346,7 @@ public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
            alquileres.add(alquilerClass);
         }
 
-        System.out.println("Consulta de alquiler por número de servicio completada correctamente.");
+        System.out.println("Consulta de alquiler por fecha completada correctamente.");
         return alquileres;
 
     } catch (SQLException ex) {
@@ -376,5 +354,30 @@ public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
         System.out.println("Error al realizar la consulta de alquiler.");
         return alquileres; // Retornar la lista vacía en caso de error
     }
+    }
+
+    @Override
+    public boolean registrarAlquiler(int numeroAlquiler, String clienteId, String empleadoId, LocalDate fechaSolicitud, LocalDate fechaAlquiler, LocalDate fechaRegreso, List<String> refPrenda) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Alquiler> obtenerTodosLosAlquileres() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Alquiler consultarAlquilerPorId(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean actualizarAlquiler(Alquiler alquiler) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean eliminarAlquiler(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

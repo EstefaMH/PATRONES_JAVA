@@ -43,21 +43,21 @@ public class AlquilerController {
     public void registros() {
 
         System.out.print(" ---------- Bienvenido al manejo de Alquileres ---------- \n\n");
-        System.out.println("Escriba el número de la opción que desea:");
-        System.out.println("1. Registros");
-        System.out.println("2. Consultas");
-        
-        System.out.println("Ingrese una opción");
-        while (!sc.hasNextInt()) {
-            System.out.println("Valor inválido. Por favor, ingrese un valor numerico.");
-            sc.nextLine();
-        }
-        int opc = sc.nextInt();
-        sc.nextLine();
-
-        switch (opc) {
-            case 1:
-        //Pedir cliente_id
+        System.out.println("Va a registrar un servicio de alquiler");
+//        System.out.println("1. Registros");
+//        System.out.println("2. Consultas");
+//        
+//        System.out.println("Ingrese una opción");
+//        while (!sc.hasNextInt()) {
+//            System.out.println("Valor inválido. Por favor, ingrese un valor numerico.");
+//            sc.nextLine();
+//        }
+//        int opc = sc.nextInt();
+//        sc.nextLine();
+//
+//        switch (opc) {
+//            case 1:
+//        //Pedir cliente_id
         do {
             System.out.print("\nIngrese el número de identificación del cliente: ");
             clienteIdIngresado = sc.nextLine();
@@ -126,10 +126,10 @@ public class AlquilerController {
         System.out.println("Número de prendas: " + numeroPrendasParaRegistro);
 
         System.out.println("Se ha creado con éxito la solicitud numero " + " con fecha de devolucion: " + fechaDevolucion);
-    break;
-            case 2:
+//    break;
+//            case 2:
                 
-        System.out.println("1. Consulta por numero de alquiler");
+       /* System.out.println("1. Consulta por numero de alquiler");
         System.out.println("2. Consulta por id de cliente");
         System.out.println("2. Consulta por fecha de alquiler");
         
@@ -148,7 +148,7 @@ public class AlquilerController {
             servicioAlquilerFacade.consultarAlquilerPorId( idIngresado2);
                break;
                case 2:
-            System.out.print("\nIngrese el id del cleinte: ");
+            System.out.print("\nIngrese el id del cliente: ");
             String idCliente = sc.nextLine();
             servicioAlquilerFacade.consultarAlquilerPorCliente(idCliente);
                break;
@@ -159,6 +159,6 @@ public class AlquilerController {
                break;
         }
                 
-    }
+    }*/
     }
 }

@@ -3,8 +3,13 @@ package com.losAtuendos;
 import com.losAtuendos.controllers.AlquilerController;
 import com.losAtuendos.controllers.PersonaController;
 import com.losAtuendos.controllers.PrendaController;
+import com.losAtuendos.service.facade.ServicioAlquilerFacadeImpl;
 import com.losAtuendos.service.PrendaService;
+import com.losAtuendos.service.PersonaService;
 import com.losAtuendos.utils.dao.DBManager;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class losAtuendos {
@@ -54,23 +59,25 @@ public class losAtuendos {
 
                 switch (opcOne) {
                     case 1:
+                        //Registrar personas
                         PersonaController personaController = new PersonaController();
                         personaController.registros();
                         break;
 
                     case 2:
+                        //Registrar prendas
                         PrendaController prendaController = new PrendaController();
                         prendaController.registros();
                         break;
 
                     case 3:
-                         //Alquiler controler método para registrar alquiler
+                        //Registrar alquileres
                         AlquilerController alquilerController = new AlquilerController();
                         alquilerController.registros();
                         break;
 
                     case 4:
-                        //Lavado controler método para registrar en lista de lavado
+                        //Registrar en lista de lavado
                         PrendaService prendaLavanderia = new PrendaService();
                         System.out.println("ingrese la referencia de la prenda");
                         String ref = sc.next();
@@ -84,12 +91,18 @@ public class losAtuendos {
                         break;
 
                     case 5:
-                        //Lavado controler método para enviar prendas a lavado según la lista
-                        System.out.println("Por implementar");
+                        //Enviar prendas a lavado según la lista
+                        PrendaService prendasLavado = new PrendaService();
+                        System.out.println("Ingrese la cantidad de prendas que desea enviar a lavado ");
+                        while (!sc.hasNextInt()) {
+                            System.out.println("Valor inválido. Por favor, ingrese un valor numerico.");
+                            sc.nextLine();
+                        }
+                        int lavado = sc.nextInt();
+                        prendasLavado.envioPrendasParaLavanderia(lavado);
                         break;
 
                     case 0:
-                        menuSystem();
                         break;
 
                     default:
@@ -118,26 +131,43 @@ public class losAtuendos {
                 sc.nextLine();
 
                 PrendaService prenda = new PrendaService();
+                PersonaService persona = new PersonaService();
+                ServicioAlquilerFacadeImpl servicioAlquilerFacade = null;
                 switch (opcTwo) {
                     case 1:
                         //Consultar alquiler por número
-                        System.out.println("Por implementar");
+                        System.out.print("\nIngrese el número de alquiler: ");
+                        int idIngresado2 = Integer.parseInt(sc.nextLine());
+                        servicioAlquilerFacade.consultarAlquilerPorId(idIngresado2);
                         break;
 
                     case 2:
                         //Consultar alquiler por cliente
-                        System.out.println("Por implementar");
+                        System.out.print("\nIngrese el id del cliente: ");
+                        String idCliente = sc.nextLine();
+                        servicioAlquilerFacade.consultarAlquilerPorCliente(idCliente);
                         break;
 
                     case 3:
                         //Consultar alquiler por fecha
-                        System.out.println("Por implementar");
+                        LocalDate fecha = LocalDate.now();
+                        System.out.print("\nIngrese la fecha de alquiler: ");
+                        String fechaString = sc.nextLine();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                        try {
+                            fecha = LocalDate.parse(fechaString, formatter);
+                            servicioAlquilerFacade.consultarAlquilerPorFecha(fecha);
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Formato de fecha inválido. Debe ser AAAA-MM-DD");
+                        }
+                        servicioAlquilerFacade.consultarAlquilerPorFecha(fecha);
                         break;
 
                     case 4:
                         //Consultar prendas por talla
                         System.out.println("Tngrese la talla que desea consultar (10, 12, 14, S, M, L, XL, XXL):");
-                        String tallaConsulta = sc.nextLine();                        
+                        String tallaConsulta = sc.nextLine();
                         prenda.getPrendasByTalla(tallaConsulta);
                         break;
 
@@ -158,17 +188,21 @@ public class losAtuendos {
 
                     case 7:
                         //Consultar lista de lavado
-                        System.out.println("Por implementar");
+                        PrendaService prendaLavanderia = new PrendaService();
+                        System.out.println("La lista de lavado actualmente tiene las siguientes entradas: ");
+                        prendaLavanderia.getPrendasParaLavanderia();
                         break;
 
                     case 8:
                         //Consultar clientes registrados
-                        System.out.println("Por implementar");
+                        System.out.println("La lista de clientes actualmente tiene las siguientes entradas: ");
+                        persona.getAllClientes();
                         break;
 
                     case 9:
                         //Consultar empleados registrados
-                        System.out.println("Por implementar");
+                        System.out.println("La lista de empleados actualmente tiene las siguientes entradas: ");
+                        persona.getAllClientes();
                         break;
 
                     case 0:

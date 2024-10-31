@@ -2,7 +2,7 @@ package com.losAtuendos.models;
 
 public abstract class Prenda {
 
-    protected String ref;
+protected String ref;
     protected String color;
     protected String marca;
     protected String talla;

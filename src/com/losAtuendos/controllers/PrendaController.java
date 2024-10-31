@@ -124,7 +124,7 @@ public class PrendaController {
                 System.out.println("Ingrese referencia del disfraz : ");
                 String referenciaDisfraz = sc.next();
 
-                System.out.print("Ingrese color del traje ");
+                System.out.print("Ingrese color del disfraz ");
                 String colorDisfraz = sc.next();
 
                 System.out.println("Ingrese marca del disfraz ");

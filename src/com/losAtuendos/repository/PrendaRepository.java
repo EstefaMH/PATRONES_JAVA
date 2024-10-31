@@ -5,6 +5,7 @@ import com.losAtuendos.models.Prenda;
 import com.losAtuendos.models.TrajeCaballero;
 import com.losAtuendos.models.VestidoDama;
 import java.util.List;
+import java.util.Map;
 
 public interface PrendaRepository {
 
@@ -24,6 +25,9 @@ public interface PrendaRepository {
     List getPrendasByReferencia(String refPrenda);
 
     List getPrendasByDisponibilidad(boolean disponiblePrenda);
-
-
-}
+    
+    Map<String, Boolean> getPrendasParaLavanderia(); 
+    
+    void envioPrendasParaLavanderia(int cantidadAEliminar);
+        
+ }

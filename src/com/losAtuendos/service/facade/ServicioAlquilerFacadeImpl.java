@@ -12,36 +12,40 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class ServicioAlquilerFacadeImpl implements ServicioAlquilerI {
-    
+
     private final ServicioAlquilerI servicioAlquiler;
 
     public ServicioAlquilerFacadeImpl(ServicioAlquilerI servicioAlquiler) {
         this.servicioAlquiler = servicioAlquiler;
     }
-    
+
+    public ServicioAlquilerFacadeImpl() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     @Override
-    public boolean registrarAlquiler(int numeroAlquiler,String clienteId, String empleadoId, LocalDate fechaSolicitud, 
-                                     LocalDate fechaAlquiler, LocalDate fechaRegreso, List<String> refPrendas) {
+    public boolean registrarAlquiler(int numeroAlquiler, String clienteId, String empleadoId, LocalDate fechaSolicitud,
+            LocalDate fechaAlquiler, LocalDate fechaRegreso, List<String> refPrendas) {
         AlquilerFactoryAbstract alquiler = new AlquilerConcreteFactory();
         try {
-            Alquiler alquilerPrincipal = alquiler.crearAlquiler("alquiler", numeroAlquiler, clienteId, empleadoId, fechaSolicitud, 
-                                                          fechaAlquiler, fechaRegreso, null);
+            Alquiler alquilerPrincipal = alquiler.crearAlquiler("alquiler", numeroAlquiler, clienteId, empleadoId, fechaSolicitud,
+                    fechaAlquiler, fechaRegreso, null);
             if (alquilerPrincipal != null) {
-            alquilerPrincipal.mostrarDetalles();
-            int numero=alquilerPrincipal.getNumeroAlquiler();
-            System.out.println("numero->"+numero);
-            // Crear cada detalle de alquiler con la lista de referencias
-            for (String refPrenda : refPrendas) {
-                Alquiler detalleAlquiler = alquiler.crearAlquiler("detalle_alquiler", numero, clienteId, 
-                                                                         empleadoId, fechaSolicitud, fechaAlquiler, fechaRegreso, refPrenda);
-                if (detalleAlquiler == null) {
-                    return false; // En caso de error, devolver false
+                alquilerPrincipal.mostrarDetalles();
+                int numero = alquilerPrincipal.getNumeroAlquiler();
+                System.out.println("numero->" + numero);
+                // Crear cada detalle de alquiler con la lista de referencias
+                for (String refPrenda : refPrendas) {
+                    Alquiler detalleAlquiler = alquiler.crearAlquiler("detalle_alquiler", numero, clienteId,
+                            empleadoId, fechaSolicitud, fechaAlquiler, fechaRegreso, refPrenda);
+                    if (detalleAlquiler == null) {
+                        return false; // En caso de error, devolver false
+                    }
                 }
+                return true;
+            } else {
+                return false;
             }
-            return true;
-        } else {
-            return false;
-        }
         } catch (Exception e) {
             System.out.println("Error al registrar alquiler: " + e.getMessage());
             return false;
@@ -57,8 +61,8 @@ public class ServicioAlquilerFacadeImpl implements ServicioAlquilerI {
     public Alquiler consultarAlquilerPorId(int id) {
         return servicioAlquiler.consultarAlquilerPorId(id);
     }
-    
-@Override
+
+    @Override
     public List<Alquiler> consultarAlquilerPorCliente(String idCliente) {
         return servicioAlquiler.consultarAlquilerPorCliente(idCliente);
     }
@@ -90,4 +94,3 @@ public class ServicioAlquilerFacadeImpl implements ServicioAlquilerI {
         }
     }
 }
-

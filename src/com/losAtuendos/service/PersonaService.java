@@ -6,9 +6,12 @@ import com.losAtuendos.models.Persona;
 import com.losAtuendos.repository.PersonasRepository;
 import com.losAtuendos.utils.dao.DBManager;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,12 +55,11 @@ public class PersonaService implements PersonasRepository {
 
         this.postPersona(empleado);
 
-        String sqlInsert = "INSERT INTO Empleado (id, cargo , persona_id) VALUES (?, ? , ?)";
+        String sqlInsert = "INSERT INTO Empleado (cargo , persona_id) VALUES (?, ? )";
         try {
             PreparedStatement pstmt = db.createConnection().prepareStatement(sqlInsert);
-            pstmt.setString(1, null);
-            pstmt.setString(2, empleado.getCargo());
-            pstmt.setString(3, empleado.getId());
+            pstmt.setString(1, empleado.getCargo());
+            pstmt.setString(2, empleado.getId());
 
             System.out.println("The SQL statement is: " + sqlInsert + "\n");
 
@@ -139,6 +141,35 @@ public class PersonaService implements PersonasRepository {
     }
 
     @Override
+    public List<Cliente> getAllClientes() {
+        List<Cliente> clientes = new ArrayList<>();
+        String sqlQuery = "SELECT p.*, c.email FROM Persona p INNER JOIN Cliente c ON p.id = c.persona_id";
+        System.out.println("Voy a hacer la consulta");
+        try {
+            PreparedStatement stmt = db.createConnection().prepareStatement(sqlQuery);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Cliente cliente = new Cliente(
+                        rs.getString("id"),
+                        rs.getString("nombre"),
+                        rs.getString("direccion"),
+                        rs.getString("telefono"),
+                        rs.getString("email")
+                );
+                clientes.add(cliente);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("La lista de clientes es: ");
+        for (Cliente cliente : clientes) {
+            System.out.println(cliente);
+        }
+        return clientes;
+    }
+
+    @Override
     public boolean getEmpleadoById(String id) {
         String sqlQuery = "SELECT p.*, e.cargo FROM Persona p INNER JOIN Empleado e ON p.numero_identificacion = e.persona_id WHERE e.persona_id = ?";
 
@@ -170,5 +201,34 @@ public class PersonaService implements PersonasRepository {
         }
         return false;
 
+    }
+
+    @Override
+    public List<Empleado> getAllEmpleados() {
+        List<Empleado> empleados = new ArrayList<>();
+        String sqlQuery = "SELECT p.*, em.cargo FROM Persona p INNER JOIN Empleado em ON p.id = em.persona_id;";
+
+        try {
+            PreparedStatement stmt = db.createConnection().prepareStatement(sqlQuery);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Empleado empleado = new Empleado(
+                        rs.getString("id"),
+                        rs.getString("nombre"),
+                        rs.getString("direccion"),
+                        rs.getString("telefono"),
+                        rs.getString("cargo")
+                );
+                empleados.add(empleado);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("La lista de clientes es: ");
+        for (Empleado empleado : empleados) {
+            System.out.println(empleados);
+        }
+        return empleados;
     }
 }
