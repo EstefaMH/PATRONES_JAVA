@@ -25,28 +25,26 @@ public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
 
     @Override
     public int postAlquiler(Alquiler alquiler) {
-    String sqlInsert = "INSERT INTO servicioAlquiler (fechaSolicitud, fechaAlquiler, fechaEntrega, cliente_id, empleado_id) VALUES (?, ?, ?, ?, ?)";
+    String sqlInsert = "INSERT INTO servicioalquiler (numero,cliente_id, empleado_id, fechaSolicitud, fechaAlquiler, fechaRegreso) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement pstmt = db.createConnection().prepareStatement(sqlInsert, Statement.RETURN_GENERATED_KEYS);
-    
-            pstmt.setDate(1,  Date.valueOf(alquiler.getFechaSolicitud()));
-            pstmt.setDate(2, Date.valueOf(alquiler.getFechaAlquiler()));
-            pstmt.setDate(3, Date.valueOf(alquiler.getFechaRegreso()));
-            pstmt.setString(4, alquiler.getCliente());
-            pstmt.setString(5, alquiler.getEmpleado());
-
-            System.out.println("The SQL statement is: " + sqlInsert + "\n");
+            pstmt.setDate(1, null);
+            pstmt.setString(2, alquiler.getCliente());
+            pstmt.setString(3, alquiler.getEmpleado());
+            pstmt.setDate(4, Date.valueOf(alquiler.getFechaSolicitud()));
+            pstmt.setDate(5, Date.valueOf(alquiler.getFechaAlquiler()));
+            pstmt.setDate(6, Date.valueOf(alquiler.getFechaRegreso()));
 
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted > 0) {
-            ResultSet generatedKeys = pstmt.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                return generatedKeys.getInt(1); // Retorna el ID generado
+                ResultSet generatedKeys = pstmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                }
+                System.out.println("Nuevo registro alquiler insertado correctamente con el numero: " + generatedKeys);
+
             }
-            System.out.println("Nuevo registro alquiler insertado correctamente.");
-            
-        }
-        throw new SQLException("Error al obtener el ID del nuevo alquiler");
+            throw new SQLException("Error al obtener el ID del nuevo alquiler");
         } catch (SQLException ex) {
             Logger.getLogger(AlquilerService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -58,11 +56,9 @@ public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
         String sqlInsert = "INSERT INTO detalleServicioAlquiler (servicio_alquiler_id, prenda_ref) VALUES (?, ?)";
         try {
             PreparedStatement pstmt = db.createConnection().prepareStatement(sqlInsert);
-            
+
             pstmt.setInt(1, detalleAlquiler.getNumeroAlquiler());
             pstmt.setString(2, detalleAlquiler.getRef());
-
-            System.out.println("The SQL statement is: " + sqlInsert + "\n");
 
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted < 0) {
@@ -85,79 +81,87 @@ public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
 
     @Override
     public List<Alquiler> getAlquilerPorNumeroAlquiler(int numeroServicio) {
-    String sqlQuery = "SELECT * FROM servicioAlquiler WHERE numero = ?";
-    List<Alquiler> alquileres = new ArrayList<>();
+   Alquiler alquilerClass = null;
+        String sqlQuery = "SELECT * FROM servicioalquiler WHERE numero = ?";
+        List<Alquiler> alquileres = new ArrayList<>();
 
-    try {
-        PreparedStatement pstmt = db.createConnection().prepareStatement(sqlQuery);
-        pstmt.setInt(1, numeroServicio); // Corregir el índice a 1
+        try {
+            PreparedStatement pstmt = db.createConnection().prepareStatement(sqlQuery);
+            pstmt.setInt(1, numeroServicio);
 
-        ResultSet rs = pstmt.executeQuery();
-        AlquilerFactoryAbstract alquiler = new AlquilerConcreteFactory();
+            ResultSet rs = pstmt.executeQuery();
+            AlquilerFactoryAbstract alquiler = new AlquilerConcreteFactory();
 
+            while (rs.next()) {
+                int numeroAlquiler = rs.getInt("numero");
+                String cliente = rs.getString("cliente_id");
+                String empleado = rs.getString("empleado_id");
+                LocalDate fechaSolicitud = rs.getDate("fechaSolicitud").toLocalDate();
+                LocalDate fechaAlquiler = rs.getDate("fechaAlquiler").toLocalDate();
+                LocalDate fechaRegreso = rs.getDate("fechaRegreso").toLocalDate();
 
-        while (rs.next()) {
-            // Asumiendo que tienes un constructor o método para crear un Alquiler a partir del ResultSet
-            int numeroAlquiler = rs.getInt("numeroAlquiler");
-            String cliente = rs.getString("idCliente");
-            String empleado = rs.getString("idEmpleado");
-            LocalDate fechaSolicitud = rs.getDate("fechaSolicitud").toLocalDate();
-            LocalDate fechaAlquiler = rs.getDate("fechaAlquiler").toLocalDate();
-            LocalDate fechaRegreso = rs.getDate("fechaRegreso").toLocalDate();
+                alquilerClass = new Alquiler(numeroAlquiler, cliente, empleado, fechaSolicitud, fechaAlquiler, fechaRegreso);
+                alquileres.add(alquilerClass);
+            }
 
-           Alquiler alquilerClass = new Alquiler(numeroAlquiler,cliente, empleado, fechaSolicitud, fechaAlquiler, fechaRegreso);
-           alquileres.add(alquilerClass);
+            System.out.println("Consulta de alquiler por número de servicio completada correctamente.");
+            if (alquilerClass != null) {
+                alquilerClass.mostrarDetalles();
+            }
+
+            return alquileres;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Alquiler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al realizar la consulta de alquiler.");
+            return alquileres;
         }
-
-        System.out.println("Consulta de alquiler por número de servicio completada correctamente.");
-        return alquileres;
-
-    } catch (SQLException ex) {
-        Logger.getLogger(Alquiler.class.getName()).log(Level.SEVERE, null, ex);
-        System.out.println("Error al realizar la consulta de alquiler.");
-        return alquileres; // Retornar la lista vacía en caso de error
-    }
 }
 
     @Override
     public List<Alquiler> getAlquilerPorCliente(String idCliente) {
-        String sqlQuery = "SELECT * FROM servicioAlquiler WHERE cliente_id = ? ORDER BY fechaAlquiler ASC";
+        Alquiler alquilerClass = null;
+        String sqlQuery = "SELECT * FROM servicioalquiler WHERE cliente_id = ? ORDER BY fechaAlquiler ASC";
         List<Alquiler> alquileres = new ArrayList<>();
 
-    try {
-        PreparedStatement pstmt = db.createConnection().prepareStatement(sqlQuery);
-        pstmt.setString(1, idCliente); // Corregir el índice a 1
+        try {
+            PreparedStatement pstmt = db.createConnection().prepareStatement(sqlQuery);
+            pstmt.setString(1, idCliente);
 
-        ResultSet rs = pstmt.executeQuery();
-        AlquilerFactoryAbstract alquiler = new AlquilerConcreteFactory();
+            ResultSet rs = pstmt.executeQuery();
+            AlquilerFactoryAbstract alquiler = new AlquilerConcreteFactory();
 
+            while (rs.next()) {
+                int numeroAlquiler = rs.getInt("numero");
+                String cliente = rs.getString("cliente_id");
+                String empleado = rs.getString("empleado_id");
+                LocalDate fechaSolicitud = rs.getDate("fechaSolicitud").toLocalDate();
+                LocalDate fechaAlquiler = rs.getDate("fechaAlquiler").toLocalDate();
+                LocalDate fechaRegreso = rs.getDate("fechaRegreso").toLocalDate();
 
-        while (rs.next()) {
-            // Asumiendo que tienes un constructor o método para crear un Alquiler a partir del ResultSet
-            int numeroAlquiler = rs.getInt("numeroAlquiler");
-            String cliente = rs.getString("idCliente");
-            String empleado = rs.getString("idEmpleado");
-            LocalDate fechaSolicitud = rs.getDate("fechaSolicitud").toLocalDate();
-            LocalDate fechaAlquiler = rs.getDate("fechaAlquiler").toLocalDate();
-            LocalDate fechaRegreso = rs.getDate("fechaRegreso").toLocalDate();
+                alquilerClass = new Alquiler(numeroAlquiler, cliente, empleado, fechaSolicitud, fechaAlquiler, fechaRegreso);
+                alquileres.add(alquilerClass);
+            }
 
-           Alquiler alquilerClass = new Alquiler(numeroAlquiler,cliente, empleado, fechaSolicitud, fechaAlquiler, fechaRegreso);
-           alquileres.add(alquilerClass);
+            System.out.println("Consulta de alquiler por número de servicio completada correctamente.");
+            if (alquiler != null) {
+                alquilerClass.mostrarDetalles();
+            }
+
+            return alquileres;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Alquiler.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al realizar la consulta de alquiler.");
+            return alquileres;
         }
-
-        System.out.println("Consulta de alquiler por número de servicio completada correctamente.");
-        return alquileres;
-
-    } catch (SQLException ex) {
-        Logger.getLogger(Alquiler.class.getName()).log(Level.SEVERE, null, ex);
-        System.out.println("Error al realizar la consulta de alquiler.");
-        return alquileres; // Retornar la lista vacía en caso de error
-    }
     }
 
     @Override
     public List<Alquiler> getAlquilerPorFecha(LocalDate fechaBusqueda) {
-        String sqlQuery = "SELECT * FROM Alquiler WHERE fechaAlquiler = ?";
+        Alquiler alquilerClass = null;
+        String sqlQuery = "SELECT * FROM servicioalquiler WHERE fechaAlquiler = ?";
         List<Alquiler> alquileres = new ArrayList<>();
 
     try {
@@ -170,18 +174,21 @@ public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
 
         while (rs.next()) {
             // Asumiendo que tienes un constructor o método para crear un Alquiler a partir del ResultSet
-            int numeroAlquiler = rs.getInt("numeroAlquiler");
-            String cliente = rs.getString("idCliente");
-            String empleado = rs.getString("idEmpleado");
+            int numeroAlquiler = rs.getInt("numero");
+            String cliente = rs.getString("cliente_id");
+            String empleado = rs.getString("empleado_id");
             LocalDate fechaSolicitud = rs.getDate("fechaSolicitud").toLocalDate();
             LocalDate fechaAlquiler = rs.getDate("fechaAlquiler").toLocalDate();
             LocalDate fechaRegreso = rs.getDate("fechaRegreso").toLocalDate();
 
-           Alquiler alquilerClass = new Alquiler(numeroAlquiler,cliente, empleado, fechaSolicitud, fechaAlquiler, fechaRegreso);
+           alquilerClass = new Alquiler(numeroAlquiler,cliente, empleado, fechaSolicitud, fechaAlquiler, fechaRegreso);
            alquileres.add(alquilerClass);
         }
 
         System.out.println("Consulta de alquiler por número de servicio completada correctamente.");
+        if (alquiler != null) {
+                alquilerClass.mostrarDetalles();
+            }
         return alquileres;
 
     } catch (SQLException ex) {
@@ -296,7 +303,7 @@ public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
         ResultSet rs = pstmt.executeQuery();
         AlquilerFactoryAbstract alquiler = new AlquilerConcreteFactory();
 
-
+        if (rs == null) {
         while (rs.next()) {
             // Asumiendo que tienes un constructor o método para crear un Alquiler a partir del ResultSet
             int numeroAlquiler = rs.getInt("numeroAlquiler");
@@ -309,7 +316,9 @@ public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
            Alquiler alquilerClass = new Alquiler(numeroAlquiler,cliente, empleado, fechaSolicitud, fechaAlquiler, fechaRegreso);
            alquileres.add(alquilerClass);
         }
-
+        } else {
+            System.out.println("El usuario no tiene alquileres registrados");
+        }
         System.out.println("Consulta de alquiler por número de servicio completada correctamente.");
         return alquileres;
 

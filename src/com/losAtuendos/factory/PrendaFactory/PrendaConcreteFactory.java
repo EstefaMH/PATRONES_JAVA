@@ -21,7 +21,7 @@ public class PrendaConcreteFactory extends PrendaFactoryAbstract {
         Prenda prenda = null;
 
         switch (tipo.toLowerCase()) {
-            case "vestido":
+            case "vestidodama":
 
                 prenda = new VestidoDama(ref, color, marca, talla, valorAlquiler, tipo, disponible, pedreria, largo, cantPiezas);
 
@@ -34,7 +34,7 @@ public class PrendaConcreteFactory extends PrendaFactoryAbstract {
                 System.out.println("create prenda " + createVestido);
 
                 break;
-            case "traje":
+            case "trajecaballero":
                 prenda = new TrajeCaballero(ref, color, marca, talla, valorAlquiler, tipo, disponible, tipoTraje, accesorio);
 
                 if (!prenda.validarDatos()) {
@@ -42,7 +42,7 @@ public class PrendaConcreteFactory extends PrendaFactoryAbstract {
                     return null;
                 }
 
-                boolean createTraje = prendaService.postPrenda((TrajeCaballero) prenda);
+                boolean createTraje = prendaService.postTrajeCaballero((TrajeCaballero) prenda);
                 System.out.println("create prenda " + createTraje);
 
                 break;

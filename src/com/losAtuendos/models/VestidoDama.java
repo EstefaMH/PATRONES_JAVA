@@ -65,9 +65,9 @@ public class VestidoDama extends Prenda {
         System.out.println("Marca: " + marca);
         System.out.println("Talla: " + talla);
         System.out.println("Valor Alquiler: " + valorAlquiler);
-        System.out.println("¿Tiene pedrería?:" + pedreria);
-        System.out.println("Altura" + largo);
-        System.out.println("cantidad de piezas" + cantPiezas);
+        System.out.println("¿Tiene pedrería?: " + pedreria);
+        System.out.println("Largo: " + largo);
+        System.out.println("Cantidad de piezas: " + cantPiezas);
         System.out.println("Tipo de prenda: " + tipo);
 
     }
@@ -78,7 +78,7 @@ public class VestidoDama extends Prenda {
         String cantidadPiezasStr = String.valueOf(cantPiezas);
 
         if (largo.isEmpty()) {
-            System.out.println("Error: La altura no puede estar vacia");
+            System.out.println("Error: El largo no puede estar vacia");
             isValid = false;
         }
         if (cantidadPiezasStr.isEmpty()) {

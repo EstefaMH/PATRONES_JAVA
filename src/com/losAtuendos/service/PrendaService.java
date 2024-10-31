@@ -92,7 +92,7 @@ public class PrendaService implements PrendaRepository {
 
         this.postPrenda(traje);
 
-        String sqlInsert = "INSERT INTO prenda (prenda_ref, tipo, aderezo) VALUES (?, ?, ?)";
+        String sqlInsert = "INSERT INTO trajecaballero (prenda_ref, tipo, accesorio) VALUES (?, ?, ?)";
         try {
             PreparedStatement pstmt = db.createConnection().prepareStatement(sqlInsert);
             pstmt.setString(1, traje.getRef());

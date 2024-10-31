@@ -36,10 +36,7 @@ public class AlquilerController {
     public AlquilerController(ServicioAlquilerFacadeImpl servicioAlquilerFacade) {
         this.servicioAlquilerFacade = servicioAlquilerFacade;
     }
-    //AlquilerFactoryAbstract alquiler = new AlquilerConcreteFactory();
-    //   AlquilerService alquilerservice = new AlquilerService();
-    // Alquiler detalleAlquiler = alquiler.crearAlquiler(numeroPrendasParaRegistro, cliente, empleado, LocalDate.EPOCH, LocalDate.MIN, LocalDate.MAX, clienteIdIngresado);
-    // Prenda vestido = prenda.crearPrenda("vestido", disponibleVestido, referenciaVestido, colorVestido, marcaVestido, tallaVestido, valorAlquilerVestido, pedreria, largoVestido, cantPiezas, null, null, null);
+    
     public void registros() {
 
         System.out.print(" ---------- Bienvenido al manejo de Alquileres ---------- \n\n");

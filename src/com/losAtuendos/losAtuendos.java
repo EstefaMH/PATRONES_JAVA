@@ -3,6 +3,7 @@ package com.losAtuendos;
 import com.losAtuendos.controllers.AlquilerController;
 import com.losAtuendos.controllers.PersonaController;
 import com.losAtuendos.controllers.PrendaController;
+import com.losAtuendos.service.AlquilerService;
 import com.losAtuendos.service.facade.ServicioAlquilerFacadeImpl;
 import com.losAtuendos.service.PrendaService;
 import com.losAtuendos.service.PersonaService;
@@ -132,20 +133,21 @@ public class losAtuendos {
 
                 PrendaService prenda = new PrendaService();
                 PersonaService persona = new PersonaService();
-                ServicioAlquilerFacadeImpl servicioAlquilerFacade = null;
+                AlquilerService alquilerService = new AlquilerService();
                 switch (opcTwo) {
                     case 1:
-                        //Consultar alquiler por número
+                        //Consultar alquiler por número                       
                         System.out.print("\nIngrese el número de alquiler: ");
-                        int idIngresado2 = Integer.parseInt(sc.nextLine());
-                        servicioAlquilerFacade.consultarAlquilerPorId(idIngresado2);
+                        int idIngresado2 = Integer.parseInt(sc.nextLine());                      
+                        alquilerService.getAlquilerPorNumeroAlquiler(idIngresado2);
                         break;
 
                     case 2:
                         //Consultar alquiler por cliente
                         System.out.print("\nIngrese el id del cliente: ");
                         String idCliente = sc.nextLine();
-                        servicioAlquilerFacade.consultarAlquilerPorCliente(idCliente);
+                        
+                        alquilerService.getAlquilerPorCliente(idCliente);
                         break;
 
                     case 3:
@@ -157,11 +159,10 @@ public class losAtuendos {
 
                         try {
                             fecha = LocalDate.parse(fechaString, formatter);
-                            servicioAlquilerFacade.consultarAlquilerPorFecha(fecha);
+                            alquilerService.getAlquilerPorFecha(fecha);
                         } catch (DateTimeParseException e) {
                             System.out.println("Formato de fecha inválido. Debe ser AAAA-MM-DD");
                         }
-                        servicioAlquilerFacade.consultarAlquilerPorFecha(fecha);
                         break;
 
                     case 4:

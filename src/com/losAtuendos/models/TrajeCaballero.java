@@ -38,8 +38,8 @@ public class TrajeCaballero extends Prenda {
         System.out.println("Valor Alquiler: " + valorAlquiler);
         System.out.println("Tipo de prenda: " + tipo);
         System.out.println("¿Está disponible?: " + disponible);
-        System.out.println("tipo" + tipoTraje);
-        System.out.println("Accesorio" + accesorio);
+        System.out.println("Tipo de traje: " + tipoTraje);
+        System.out.println("Accesorio: " + accesorio);
     }
 
     @Override

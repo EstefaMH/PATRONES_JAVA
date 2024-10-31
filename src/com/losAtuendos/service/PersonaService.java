@@ -29,7 +29,6 @@ public class PersonaService implements PersonasRepository {
             pstmt.setString(3, persona.getDireccion());
             pstmt.setString(4, persona.getTelefono());
 
-            System.out.println("The SQL statement is: " + sqlInsert + "\n");
 
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted < 0) {
@@ -61,8 +60,6 @@ public class PersonaService implements PersonasRepository {
             pstmt.setString(1, empleado.getCargo());
             pstmt.setString(2, empleado.getId());
 
-            System.out.println("The SQL statement is: " + sqlInsert + "\n");
-
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted > 0) {
                 System.out.println("Nuevo registro insertado correctamente.");
@@ -88,7 +85,6 @@ public class PersonaService implements PersonasRepository {
             pstmt.setString(1, cliente.getMail());
             pstmt.setString(2, cliente.getId());
 
-            System.out.println("The SQL statement is: " + sqlInsert + "\n");
 
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted > 0) {
@@ -164,7 +160,7 @@ public class PersonaService implements PersonasRepository {
 
         System.out.println("La lista de clientes es: ");
         for (Cliente cliente : clientes) {
-            System.out.println(cliente);
+            cliente.mostrarDetalles();
         }
         return clientes;
     }
@@ -227,7 +223,7 @@ public class PersonaService implements PersonasRepository {
 
         System.out.println("La lista de clientes es: ");
         for (Empleado empleado : empleados) {
-            System.out.println(empleados);
+            empleado.mostrarDetalles();
         }
         return empleados;
     }

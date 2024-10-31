@@ -28,7 +28,7 @@ public class PrendaController {
 
         System.out.print(" ---------- Bienvenido a registros de Prendas los Atuendos ---------- \n\n");
         System.out.println("Seleccione el tipo de persona a crear:");
-        System.out.println("1. Vestido");
+        System.out.println("1. Vestido Dama");
         System.out.println("2. Traje caballero");
         System.out.println("3. Disfraz");
 
@@ -80,7 +80,7 @@ public class PrendaController {
                 int cantPiezas = sc.nextInt();
                 sc.nextLine();
 
-                Prenda vestido = prenda.crearPrenda("vestido", disponibleVestido, referenciaVestido, colorVestido, marcaVestido, tallaVestido, valorAlquilerVestido, pedreria, largoVestido, cantPiezas, null, null, null);
+                Prenda vestido = prenda.crearPrenda("vestidoDama", disponibleVestido, referenciaVestido, colorVestido, marcaVestido, tallaVestido, valorAlquilerVestido, pedreria, largoVestido, cantPiezas, null, null, null);
 
                 if (vestido != null) {
                     vestido.mostrarDetalles();
@@ -113,7 +113,7 @@ public class PrendaController {
                 System.out.println("Ingrese si está diponible: (Y / N):");
                 disponibleTraje = "Y".equalsIgnoreCase(sc.next().toUpperCase());
 
-                Prenda traje = prenda.crearPrenda("traje", disponibleTraje, referenciaTraje, colorTraje, marcaTraje, tallaTraje, valorAlquilerTraje, false, null, 0, tipoTraje, accesorioTraje, null);
+                Prenda traje = prenda.crearPrenda("trajeCaballero", disponibleTraje, referenciaTraje, colorTraje, marcaTraje, tallaTraje, valorAlquilerTraje, false, null, 0, tipoTraje, accesorioTraje, null);
 
                 if (traje != null) {
                     traje.mostrarDetalles();
