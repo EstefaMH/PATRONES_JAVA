@@ -2,6 +2,7 @@ package com.losAtuendos.service;
 
 import com.losAtuendos.factory.AlquilerFactory.AlquilerConcreteFactory;
 import com.losAtuendos.factory.AlquilerFactory.AlquilerFactoryAbstract;
+import com.losAtuendos.iterators.AlquilerAggregate;
 import com.losAtuendos.models.Alquiler;
 import com.losAtuendos.models.DetalleAlquiler;
 import com.losAtuendos.repository.AlquilerRepository;
@@ -18,10 +19,16 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
 
     private DBManager db = new DBManager();
+    //private AlquilerAggregate alquilerAggregate;
+    
+    //public AlquilerService(){
+      //  this.alquilerAggregate =  new AlquilerAggregate();
+    //}
 
     @Override
     public int postAlquiler(Alquiler alquiler) {
@@ -83,7 +90,8 @@ public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
     public List<Alquiler> getAlquilerPorNumeroAlquiler(int numeroServicio) {
    Alquiler alquilerClass = null;
         String sqlQuery = "SELECT * FROM servicioalquiler WHERE numero = ?";
-        List<Alquiler> alquileres = new ArrayList<>();
+        //List<Alquiler> alquileres = new ArrayList<>();
+        AlquilerAggregate alquilerAggregate = new AlquilerAggregate();
 
         try {
             PreparedStatement pstmt = db.createConnection().prepareStatement(sqlQuery);
@@ -101,22 +109,31 @@ public class AlquilerService implements AlquilerRepository,ServicioAlquilerI {
                 LocalDate fechaRegreso = rs.getDate("fechaRegreso").toLocalDate();
 
                 alquilerClass = new Alquiler(numeroAlquiler, cliente, empleado, fechaSolicitud, fechaAlquiler, fechaRegreso);
-                alquileres.add(alquilerClass);
+                alquilerAggregate.add(alquilerClass);
             }
 
             System.out.println("Consulta de alquiler por número de servicio completada correctamente.");
             if (alquilerClass != null) {
                 alquilerClass.mostrarDetalles();
+                imprimirAlquileres((Iterator<Alquiler>) alquilerAggregate.createIterator());
             }
 
-            return alquileres;
+            return alquilerAggregate.getList();
 
         } catch (SQLException ex) {
             Logger.getLogger(Alquiler.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Error al realizar la consulta de alquiler.");
-            return alquileres;
+            return alquilerAggregate.getList();
         }
 }
+    
+    private void imprimirAlquileres(Iterator<Alquiler> iterator) {
+    while (iterator.hasNext()) {
+        Alquiler alquiler = iterator.next();
+        alquiler.mostrarDetalles();
+    }
+}
+
 
     @Override
     public List<Alquiler> getAlquilerPorCliente(String idCliente) {
