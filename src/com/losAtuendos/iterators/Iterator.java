@@ -9,7 +9,7 @@ package com.losAtuendos.iterators;
  *
  * @author yanyg
  */
-public interface Iterator<T> {
+public abstract interface Iterator<T> {
    boolean hasNext();
       T next();    
 }

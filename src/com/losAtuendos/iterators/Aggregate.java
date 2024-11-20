@@ -9,7 +9,7 @@ package com.losAtuendos.iterators;
  *
  * @author yanyg
  */
-public interface Aggregate<T> {
+public abstract interface Aggregate<T> {
     Iterator<T> createIterator();
     
 }
