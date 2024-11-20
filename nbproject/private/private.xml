@@ -3,23 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/models/Alquiler.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/controllers/AlquilerController.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/service/AlquilerService.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/service/facade/ServicioAlquilerI.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/repository/AlquilerRepository.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/controllers/PersonaController.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/utils/dao/DBManager.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/factory/AlquilerFactory/AlquilerConcreteFactory.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/service/PersonaService.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/models/Cliente.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/utils/dao/TemporalDAO.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/service/PrendaService.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/factory/AlquilerFactory/AlquilerFactoryAbstract.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/models/DetalleAlquiler.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/controllers/PrendaController.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/losAtuendos.java</file>
-            <file>file:/C:/Users/yanyg/OneDrive/Documentos/GitHub/PATRONES_JAVA/src/com/losAtuendos/service/facade/ServicioAlquilerFacadeImpl.java</file>
+            <file>file:/C:/Users/yanyg/OneDrive/Documentos/Atuendos/PATRONES_JAVA/src/com/losAtuendos/iterators/Iterator.java</file>
+            <file>file:/C:/Users/yanyg/OneDrive/Documentos/Atuendos/PATRONES_JAVA/src/com/losAtuendos/utils/dao/DBManager.java</file>
+            <file>file:/C:/Users/yanyg/OneDrive/Documentos/Atuendos/PATRONES_JAVA/src/com/losAtuendos/losAtuendos.java</file>
+            <file>file:/C:/Users/yanyg/OneDrive/Documentos/Atuendos/PATRONES_JAVA/src/com/losAtuendos/iterators/Aggregate.java</file>
+            <file>file:/C:/Users/yanyg/OneDrive/Documentos/Atuendos/PATRONES_JAVA/src/com/losAtuendos/iterators/AlquilerAggregate.java</file>
+            <file>file:/C:/Users/yanyg/OneDrive/Documentos/Atuendos/PATRONES_JAVA/src/com/losAtuendos/service/AlquilerService.java</file>
+            <file>file:/C:/Users/yanyg/OneDrive/Documentos/Atuendos/PATRONES_JAVA/src/com/losAtuendos/iterators/AlquilerIterator.java</file>
+            <file>file:/C:/Users/yanyg/OneDrive/Documentos/Atuendos/PATRONES_JAVA/src/com/losAtuendos/controllers/AlquilerController.java</file>
+            <file>file:/C:/Users/yanyg/OneDrive/Documentos/Atuendos/PATRONES_JAVA/src/com/losAtuendos/service/PrendaService.java</file>
         </group>
     </open-files>
 </project-private>
