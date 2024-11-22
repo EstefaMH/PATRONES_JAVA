@@ -29,6 +29,19 @@ public class TrajeCaballero extends Prenda {
     }
 
     @Override
+    public String toString() {
+        return "TrajeCaballero{" + 
+                "Referencia: " + ref +
+                ", Color: " + color + 
+                ", Marca: " + marca+
+                ", Talla: " + talla+
+                ", Valor Alquiler: " + valorAlquiler+
+                ", ¿Está disponible?: " + disponible+
+                ", tipoTraje=" + tipoTraje + 
+                ", accesorio=" + accesorio + '}';
+    }
+
+    @Override
     public void mostrarDetalles() {
         System.out.println("Traje Caballero:");
         System.out.println("Referencia: " + ref);

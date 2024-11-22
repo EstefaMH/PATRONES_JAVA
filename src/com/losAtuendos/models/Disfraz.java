@@ -33,6 +33,19 @@ public class Disfraz extends Prenda {
     }
 
     @Override
+    public String toString() {
+        return "Disfraz{" + 
+                "Referencia: " + ref +
+                ", Color: " + color + 
+                ", Marca: " + marca+
+                ", Talla: " + talla+
+                ", Valor Alquiler: " + valorAlquiler+
+                ", ¿Está disponible?: " + disponible+
+                ", nombreDisfraz=" + nombreDisfraz + 
+                '}';
+    }
+
+    @Override
     public boolean validarDatos() {
            boolean isValid = validarDatosComunes();
 

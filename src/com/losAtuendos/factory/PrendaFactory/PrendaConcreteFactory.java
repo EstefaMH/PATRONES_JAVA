@@ -5,8 +5,6 @@ import com.losAtuendos.models.Prenda;
 import com.losAtuendos.models.TrajeCaballero;
 import com.losAtuendos.models.VestidoDama;
 import com.losAtuendos.service.PrendaService;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PrendaConcreteFactory extends PrendaFactoryAbstract {
 

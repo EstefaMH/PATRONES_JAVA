@@ -2,6 +2,8 @@ package com.losAtuendos.service;
 
 import com.losAtuendos.factory.PrendaFactory.PrendaConcreteFactory;
 import com.losAtuendos.factory.PrendaFactory.PrendaFactoryAbstract;
+import com.losAtuendos.iterators.PrendasIterator.PrendasAggregate;
+import com.losAtuendos.iterators.PrendasIterator.PrendasIterator;
 import com.losAtuendos.models.Disfraz;
 import com.losAtuendos.models.Prenda;
 import com.losAtuendos.models.TrajeCaballero;
@@ -22,6 +24,7 @@ import java.util.logging.Logger;
 public class PrendaService implements PrendaRepository {
 
     DBManager db = new DBManager();
+    PrendasAggregate prendasAggregate = new PrendasAggregate();
 
     @Override
     public boolean postPrenda(Prenda prenda) {
@@ -149,6 +152,7 @@ public class PrendaService implements PrendaRepository {
 
     @Override
     public List getPrendasByTalla(String tallaPrenda) {
+
         List listaPrendas = new ArrayList<>();
         PrendaFactoryAbstract prenda = new PrendaConcreteFactory();
         String sql = "SELECT p.ref, p.color, p.marca, p.talla, p.valorAlquiler, p.tipo, p.disponible, "
@@ -162,11 +166,9 @@ public class PrendaService implements PrendaRepository {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-
                 String tipoPrenda = rs.getString("tipo");
                 if (tipoPrenda.equals("vestidoDama")) {
-                    List<VestidoDama> vestidos = new ArrayList<>();
-                    vestidos.add(new VestidoDama(
+                    prendasAggregate.add(new VestidoDama(
                             rs.getString("ref"),
                             rs.getString("color"),
                             rs.getString("marca"),
@@ -178,17 +180,8 @@ public class PrendaService implements PrendaRepository {
                             rs.getString("largo"),
                             rs.getInt("cantPiezas")
                     ));
-                    System.out.println(" ------- Vestidos Dama -------- ");
-                    for (VestidoDama vestido : vestidos) {
-
-                        System.out.println(" --------------- ");
-                        vestido.mostrarDetalles();
-                        System.out.println(" --------------- ");
-                    }
-                    System.out.println("\n\n");
                 } else if (tipoPrenda.equals("trajeCaballero")) {
-                    List<TrajeCaballero> trajes = new ArrayList<>();
-                    trajes.add(new TrajeCaballero(
+                    prendasAggregate.add(new TrajeCaballero(
                             rs.getString("ref"),
                             rs.getString("color"),
                             rs.getString("marca"),
@@ -199,17 +192,9 @@ public class PrendaService implements PrendaRepository {
                             rs.getString("tipoTraje"),
                             rs.getString("accesorio")
                     ));
-                    System.out.println(" ------- Traje Caballero -------- ");
-                    for (TrajeCaballero traje : trajes) {
-                        System.out.println(" --------------- ");
-                        traje.mostrarDetalles();
-                        System.out.println(" --------------- ");
-
-                    }
-                    System.out.println("\n\n");
                 } else if (tipoPrenda.equals("disfraz")) {
-                    List<Disfraz> disfraces = new ArrayList<>();
-                    disfraces.add(new Disfraz(
+
+                    prendasAggregate.add(new Disfraz(
                             rs.getString("ref"),
                             rs.getString("color"),
                             rs.getString("marca"),
@@ -219,16 +204,11 @@ public class PrendaService implements PrendaRepository {
                             rs.getBoolean("disponible"),
                             rs.getString("nombre")
                     ));
-                    System.out.println(" ------- Disfraces -------- ");
-                    for (Disfraz disfraz : disfraces) {
-                        System.out.println(" --------------- ");
-                        disfraz.mostrarDetalles();
-                        System.out.println(" --------------- ");
-
-                    }
-                    System.out.println("\n\n");
                 }
             }
+            System.out.println(" ------------ Lista de prendas  --------- ");
+            System.out.println();
+            prendasAggregate.printPrendasPorTipo();
             rs.close();
             stmt.close();
         } catch (SQLException e) {
@@ -255,8 +235,7 @@ public class PrendaService implements PrendaRepository {
 
                 String tipoPrenda = rs.getString("tipo");
                 if (tipoPrenda.equals("vestidoDama")) {
-                    List<VestidoDama> vestidos = new ArrayList<>();
-                    vestidos.add(new VestidoDama(
+                    prendasAggregate.add(new VestidoDama(
                             rs.getString("ref"),
                             rs.getString("color"),
                             rs.getString("marca"),
@@ -268,17 +247,8 @@ public class PrendaService implements PrendaRepository {
                             rs.getString("largo"),
                             rs.getInt("cantPiezas")
                     ));
-                    System.out.println(" ------- Vestidos Dama -------- ");
-                    for (VestidoDama vestido : vestidos) {
-
-                        System.out.println(" --------------- ");
-                        vestido.mostrarDetalles();
-                        System.out.println(" --------------- ");
-                    }
-                    System.out.println("\n\n");
                 } else if (tipoPrenda.equals("trajeCaballero")) {
-                    List<TrajeCaballero> trajes = new ArrayList<>();
-                    trajes.add(new TrajeCaballero(
+                    prendasAggregate.add(new TrajeCaballero(
                             rs.getString("ref"),
                             rs.getString("color"),
                             rs.getString("marca"),
@@ -289,17 +259,9 @@ public class PrendaService implements PrendaRepository {
                             rs.getString("tipoTraje"),
                             rs.getString("accesorio")
                     ));
-                    System.out.println(" ------- Traje Caballero -------- ");
-                    for (TrajeCaballero traje : trajes) {
-                        System.out.println(" --------------- ");
-                        traje.mostrarDetalles();
-                        System.out.println(" --------------- ");
-
-                    }
-                    System.out.println("\n\n");
                 } else if (tipoPrenda.equals("disfraz")) {
-                    List<Disfraz> disfraces = new ArrayList<>();
-                    disfraces.add(new Disfraz(
+
+                    prendasAggregate.add(new Disfraz(
                             rs.getString("ref"),
                             rs.getString("color"),
                             rs.getString("marca"),
@@ -309,16 +271,11 @@ public class PrendaService implements PrendaRepository {
                             rs.getBoolean("disponible"),
                             rs.getString("nombre")
                     ));
-                    System.out.println(" ------- Disfraces -------- ");
-                    for (Disfraz disfraz : disfraces) {
-                        System.out.println(" --------------- ");
-                        disfraz.mostrarDetalles();
-                        System.out.println(" --------------- ");
-
-                    }
-                    System.out.println("\n\n");
                 }
             }
+            System.out.println(" ------------ PRENDA  POR REFERENCIA --------- ");
+            System.out.println();
+            prendasAggregate.printPrendasPorTipo();
             rs.close();
             stmt.close();
         } catch (SQLException e) {
@@ -345,8 +302,7 @@ public class PrendaService implements PrendaRepository {
 
                 String tipoPrenda = rs.getString("tipo");
                 if (tipoPrenda.equals("vestidoDama")) {
-                    List<VestidoDama> vestidos = new ArrayList<>();
-                    vestidos.add(new VestidoDama(
+                    prendasAggregate.add(new VestidoDama(
                             rs.getString("ref"),
                             rs.getString("color"),
                             rs.getString("marca"),
@@ -358,17 +314,8 @@ public class PrendaService implements PrendaRepository {
                             rs.getString("largo"),
                             rs.getInt("cantPiezas")
                     ));
-                    System.out.println(" ------- Vestidos Dama -------- ");
-                    for (VestidoDama vestido : vestidos) {
-
-                        System.out.println(" --------------- ");
-                        vestido.mostrarDetalles();
-                        System.out.println(" --------------- ");
-                    }
-                    System.out.println("\n\n");
                 } else if (tipoPrenda.equals("trajeCaballero")) {
-                    List<TrajeCaballero> trajes = new ArrayList<>();
-                    trajes.add(new TrajeCaballero(
+                    prendasAggregate.add(new TrajeCaballero(
                             rs.getString("ref"),
                             rs.getString("color"),
                             rs.getString("marca"),
@@ -379,17 +326,9 @@ public class PrendaService implements PrendaRepository {
                             rs.getString("tipoTraje"),
                             rs.getString("accesorio")
                     ));
-                    System.out.println(" ------- Traje Caballero -------- ");
-                    for (TrajeCaballero traje : trajes) {
-                        System.out.println(" --------------- ");
-                        traje.mostrarDetalles();
-                        System.out.println(" --------------- ");
-
-                    }
-                    System.out.println("\n\n");
                 } else if (tipoPrenda.equals("disfraz")) {
-                    List<Disfraz> disfraces = new ArrayList<>();
-                    disfraces.add(new Disfraz(
+
+                    prendasAggregate.add(new Disfraz(
                             rs.getString("ref"),
                             rs.getString("color"),
                             rs.getString("marca"),
@@ -399,16 +338,11 @@ public class PrendaService implements PrendaRepository {
                             rs.getBoolean("disponible"),
                             rs.getString("nombre")
                     ));
-                    System.out.println(" ------- Disfraces -------- ");
-                    for (Disfraz disfraz : disfraces) {
-                        System.out.println(" --------------- ");
-                        disfraz.mostrarDetalles();
-                        System.out.println(" --------------- ");
-
-                    }
-                    System.out.println("\n\n");
                 }
             }
+            System.out.println(" ------------ DISPONIBILIDAD DE LA PRENDA --------- ");
+            System.out.println();
+            prendasAggregate.printPrendasPorTipo();
             rs.close();
             stmt.close();
         } catch (SQLException e) {

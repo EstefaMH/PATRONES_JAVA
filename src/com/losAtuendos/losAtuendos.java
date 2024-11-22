@@ -4,7 +4,6 @@ import com.losAtuendos.controllers.AlquilerController;
 import com.losAtuendos.controllers.PersonaController;
 import com.losAtuendos.controllers.PrendaController;
 import com.losAtuendos.service.AlquilerService;
-import com.losAtuendos.service.facade.ServicioAlquilerFacadeImpl;
 import com.losAtuendos.service.PrendaService;
 import com.losAtuendos.service.PersonaService;
 import com.losAtuendos.utils.dao.DBManager;
@@ -138,7 +137,7 @@ public class losAtuendos {
                     case 1:
                         //Consultar alquiler por número                       
                         System.out.print("\nIngrese el número de alquiler: ");
-                        int idIngresado2 = Integer.parseInt(sc.nextLine());                      
+                        int idIngresado2 = Integer.parseInt(sc.nextLine());
                         alquilerService.getAlquilerPorNumeroAlquiler(idIngresado2);
                         break;
 
@@ -146,7 +145,7 @@ public class losAtuendos {
                         //Consultar alquiler por cliente
                         System.out.print("\nIngrese el id del cliente: ");
                         String idCliente = sc.nextLine();
-                        
+
                         alquilerService.getAlquilerPorCliente(idCliente);
                         break;
 
@@ -167,9 +166,11 @@ public class losAtuendos {
 
                     case 4:
                         //Consultar prendas por talla
+
                         System.out.println("Tngrese la talla que desea consultar (10, 12, 14, S, M, L, XL, XXL):");
                         String tallaConsulta = sc.nextLine();
                         prenda.getPrendasByTalla(tallaConsulta);
+
                         break;
 
                     case 5:
@@ -205,7 +206,6 @@ public class losAtuendos {
                         System.out.println("La lista de empleados actualmente tiene las siguientes entradas: ");
                         persona.getAllClientes();
                         break;
-
                     case 0:
                         menuSystem();
                         break;

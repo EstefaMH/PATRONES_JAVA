@@ -32,4 +32,7 @@ public class AlquilerIterator implements Iterator<Alquiler>{
         return alquileres.get(position++);
     }
     
+    
+    
+    
 }

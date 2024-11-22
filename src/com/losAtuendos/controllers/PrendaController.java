@@ -7,6 +7,7 @@ package com.losAtuendos.controllers;
 
 import com.losAtuendos.factory.PrendaFactory.PrendaConcreteFactory;
 import com.losAtuendos.factory.PrendaFactory.PrendaFactoryAbstract;
+import com.losAtuendos.iterators.PrendasIterator.PrendasAggregate;
 import com.losAtuendos.models.Prenda;
 import java.util.Scanner;
 
@@ -25,9 +26,10 @@ public class PrendaController {
         boolean disponibleDisfraz;
 
         PrendaFactoryAbstract prenda = new PrendaConcreteFactory();
+        PrendasAggregate prendasAggregate = new PrendasAggregate();
 
         System.out.print(" ---------- Bienvenido a registros de Prendas los Atuendos ---------- \n\n");
-        System.out.println("Seleccione el tipo de persona a crear:");
+        System.out.println("Seleccione el tipo de prenda a crear:");
         System.out.println("1. Vestido Dama");
         System.out.println("2. Traje caballero");
         System.out.println("3. Disfraz");
@@ -83,7 +85,8 @@ public class PrendaController {
                 Prenda vestido = prenda.crearPrenda("vestidoDama", disponibleVestido, referenciaVestido, colorVestido, marcaVestido, tallaVestido, valorAlquilerVestido, pedreria, largoVestido, cantPiezas, null, null, null);
 
                 if (vestido != null) {
-                    vestido.mostrarDetalles();
+                    //vestido.mostrarDetalles();
+                   prendasAggregate.add(vestido);
                 }
 
                 break;
